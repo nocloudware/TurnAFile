@@ -10,7 +10,9 @@
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource WindowBackgroundBrush}"
         FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}"
-        FontFamily="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}">
+        FontFamily="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}"
+        WindowStyle="None"
+        AllowsTransparency="False">
 
     <Window.Resources>
         <resx:StringsWrapper x:Key="Strings" />
@@ -25,6 +27,7 @@
         <BitmapImage x:Key="FlagDe" UriSource="/Assets/Emojis/flag-de.png" />
         <BitmapImage x:Key="FlagCn" UriSource="/Assets/Emojis/flag-cn.png" />
         <BitmapImage x:Key="FlagJp" UriSource="/Assets/Emojis/flag-jp.png" />
+        <BitmapImage x:Key="FlagBr" UriSource="/Assets/Emojis/flag-br.png" />
     </Window.Resources>
 
     <Grid Margin="10">
@@ -34,8 +37,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <Grid Grid.Row="0" Margin="0,0,0,10">
+        <!-- Header (draggable) -->
+        <Grid Grid.Row="0" Margin="0,0,0,10" MouseLeftButtonDown="OnHeaderMouseDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -60,31 +63,33 @@
             <StackPanel Grid.Column="2" Orientation="Horizontal">
                 <!-- Language Selector -->
                 <ComboBox x:Name="LanguageSelector"
-                          MinWidth="130"
-                          Margin="0,0,8,0"
+                          MinWidth="60"
+                          MaxWidth="60"
+                          Margin="0,0,6,0"
                           Style="{StaticResource ThemedComboBoxStyle}"
                           VerticalContentAlignment="Center"
                           SelectionChanged="OnLanguageSelectionChanged"
                           ToolTip="{Binding Source={StaticResource Strings}, Path=SettingsLanguage}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{Binding Flag}" Width="20" Height="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Source="{Binding Flag}" Width="18" Height="12" VerticalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
 
                 <!-- Theme Toggle Button -->
-                <ui:Button Width="36" Height="36"
+                <ui:Button Width="28" Height="28"
                         Click="OnThemeToggleClick"
                         Appearance="Transparent"
+                        Padding="2"
                         ToolTip="{Binding Source={StaticResource Strings}, Path=ThemeToggleTooltip}">
                     <ui:Button.Icon>
-                        <ui:SymbolIcon x:Name="ThemeIcon" Symbol="WeatherMoon20"/>
+                        <ui:SymbolIcon x:Name="ThemeIcon" Symbol="WeatherMoon20" FontSize="16"/>
                     </ui:Button.Icon>
                 </ui:Button>
+
             </StackPanel>
         </Grid>
 

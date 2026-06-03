@@ -22,6 +22,9 @@ public class AppSettings
     public string ActiveDocumentFormat { get; set; } = "DOCX";
     public string ActiveDataFormat { get; set; } = "XLSX";
 
+    // Idioma activo (código ISO 639-1: en, es, fr, de, zh, ja, pt)
+    public string ActiveLanguage { get; set; } = string.Empty;
+
     // Calidades por defecto
     public VideoQuality DefaultVideoQuality { get; set; } = VideoQuality.Medium;
     public AudioQuality DefaultAudioQuality { get; set; } = AudioQuality.Medium;

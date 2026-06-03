@@ -90,12 +90,11 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
     public List<string> VideoFormats { get; } = new() { "MP4", "AVI", "MKV", "WEBM", "MOV", "MP3", "M4A" };
     public List<string> AudioFormats { get; } = new() { "MP3", "WAV", "M4A", "FLAC", "OGG" };
-    public List<string> ImageFormats { get; } = new() { "JPG", "PNG", "WEBP", "GIF", "BMP", "PDF", "OCR" };
+    public List<string> ImageFormats { get; } = new() { "JPG", "PNG", "WEBP", "GIF", "BMP", "TIFF", "PDF", "TXT (OCR)" };
 
     // Nuevos formatos para documentos, datos y OCR
-    public List<string> DocumentFormats { get; } = new() { "DOCX", "PDF", "MD", "HTML", "EPUB", "TXT" };
+    public List<string> DocumentFormats { get; } = new() { "DOCX", "PDF", "MD", "HTML", "EPUB", "TXT", "RTF", "ODT" };
     public List<string> DataFileFormats { get; } = new() { "XLSX", "CSV", "JSON", "PDF" };
-    public List<string> OcrFormats { get; } = new() { "TXT", "DOCX", "XLSX", "PDF" };
 
     private string _selectedVideoFormat = "MP4";
     private string _selectedAudioFormat = "MP3";
@@ -179,6 +178,15 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         FileListBox.ItemsSource = _files;
 
         InitializeLanguageSelector();
+
+        if (ShellMenuInstaller.IsInstalled())
+        {
+            _ = Task.Run(() =>
+            {
+                try { ShellMenuInstaller.Reinstall(); }
+                catch (Exception ex) { Debug.WriteLine($"Error reinstalling shell menu: {ex.Message}"); }
+            });
+        }
     }
 
     // ─────────────────────────────────────────────────────────────────────
@@ -194,7 +202,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             new LanguageInfo("Français", "/Assets/Emojis/flag-fr.png", "fr"),
             new LanguageInfo("Deutsch", "/Assets/Emojis/flag-de.png", "de"),
             new LanguageInfo("中文", "/Assets/Emojis/flag-cn.png", "zh"),
-            new LanguageInfo("日本語", "/Assets/Emojis/flag-jp.png", "ja")
+            new LanguageInfo("日本語", "/Assets/Emojis/flag-jp.png", "ja"),
+            new LanguageInfo("Português", "/Assets/Emojis/flag-br.png", "pt")
         };
 
         LanguageSelector.ItemsSource = languages;
@@ -483,13 +492,11 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                     break;
 
                 case FileCategory.Image:
-                    if (_selectedImageFormat == "OCR")
+                    if (_selectedImageFormat == "TXT (OCR)")
                     {
                         if (_ocrConverter != null)
                         {
-                            string ocrTarget = targetFormat.ToLower() == "xlsx" ? "xlsx" :
-                                              (targetFormat.ToLower() == "docx" ? "docx" : "txt");
-                            var result = await _ocrConverter.ConvertImageToTextAsync(file.FullPath, outputPath, ocrTarget, _currentCts.Token);
+                            var result = await _ocrConverter.ConvertImageToTextAsync(file.FullPath, outputPath, "txt", _currentCts.Token);
                             success = result.Success;
                             if (!success) _progressWindow.SetError(result.ErrorMessage ?? StringsWrapper.Instance.OCRConversionFailed);
                             else _progressWindow.SetCompleted();
@@ -653,6 +660,12 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         _selectedDocumentFormat = !string.IsNullOrEmpty(settings.ActiveDocumentFormat) ? settings.ActiveDocumentFormat : "DOCX";
         _selectedDataFormat = !string.IsNullOrEmpty(settings.ActiveDataFormat) ? settings.ActiveDataFormat : "XLSX";
 
+        if (!string.IsNullOrEmpty(settings.ActiveLanguage))
+        {
+            var culture = new System.Globalization.CultureInfo(settings.ActiveLanguage);
+            StringsWrapper.SetCulture(culture);
+        }
+
         OnPropertyChanged(nameof(SelectedVideoFormat));
         OnPropertyChanged(nameof(SelectedAudioFormat));
         OnPropertyChanged(nameof(SelectedImageFormat));
@@ -694,6 +707,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         settings.ActiveImageFormat = _selectedImageFormat;
         settings.ActiveDocumentFormat = _selectedDocumentFormat;
         settings.ActiveDataFormat = _selectedDataFormat;
+        settings.ActiveLanguage = StringsWrapper.CurrentCulture.TwoLetterISOLanguageName;
 
         settings.DefaultVideoQuality = _selectedVideoQuality switch
         {
@@ -759,6 +773,16 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             {
                 var culture = new System.Globalization.CultureInfo(selectedLanguage.CultureCode);
                 StringsWrapper.SetCulture(culture);
+                SaveSettings();
+
+                if (ShellMenuInstaller.IsInstalled())
+                {
+                    _ = Task.Run(() =>
+                    {
+                        try { ShellMenuInstaller.Reinstall(); }
+                        catch (Exception ex) { Debug.WriteLine($"Error reinstalling shell menu: {ex.Message}"); }
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -859,7 +883,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
         string ext = Path.GetExtension(fileName).ToLower();
 
-        if (ext is ".docx" or ".pdf" or ".md" or ".markdown" or ".html" or ".htm" or ".epub" or ".txt")
+        if (ext is ".docx" or ".pdf" or ".md" or ".markdown" or ".html" or ".htm" or ".epub" or ".txt" or ".rtf" or ".odt")
             return FileCategory.Document;
 
         if (ext is ".xlsx" or ".xls" or ".csv" or ".json")
@@ -880,7 +904,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             case FileCategory.Video: return _selectedVideoFormat;
             case FileCategory.Audio: return _selectedAudioFormat;
             case FileCategory.Image:
-                return _selectedImageFormat == "OCR" ? "TXT" : _selectedImageFormat;
+                return _selectedImageFormat == "TXT (OCR)" ? "TXT" : _selectedImageFormat;
             case FileCategory.Document: return _selectedDocumentFormat;
             case FileCategory.Data: return _selectedDataFormat;
             default: return "MP4";
@@ -1007,13 +1031,11 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                             break;
 
                         case FileCategory.Image:
-                            if (_selectedImageFormat == "OCR")
+                            if (_selectedImageFormat == "TXT (OCR)")
                             {
                                 if (_ocrConverter != null)
                                 {
-                                    string ocrTarget = targetFormat.ToLower() == "xlsx" ? "xlsx" :
-                                                      (targetFormat.ToLower() == "docx" ? "docx" : "txt");
-                                    var result = await _ocrConverter.ConvertImageToTextAsync(file.FullPath, outputPath, ocrTarget, ct);
+                                    var result = await _ocrConverter.ConvertImageToTextAsync(file.FullPath, outputPath, "txt", ct);
                                     ok = result.Success;
                                     if (!ok)
                                     {
@@ -1225,5 +1247,11 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         var w = new Views.AboutWindow { Owner = this };
         w.ShowDialog();
+    }
+
+    private void OnHeaderMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.LeftButton == MouseButtonState.Pressed)
+            DragMove();
     }
 }

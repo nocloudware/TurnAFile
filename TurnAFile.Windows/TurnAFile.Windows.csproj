@@ -9,6 +9,8 @@
 		<RootNamespace>TurnAFile.Windows</RootNamespace>
 		<ApplicationIcon>Assets\icon-toggles.ico</ApplicationIcon>
 		<PlatformTarget>x64</PlatformTarget>
+		<Version>1.0.0</Version>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -50,6 +52,9 @@
 		<EmbeddedResource Update="Resources\Strings.ja.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
 		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\Strings.pt.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
 		<Compile Update="Resources\Strings.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>
@@ -74,6 +79,21 @@
 
 	<ItemGroup>
 		<Content Include="Libs\ClosedXML\LICENSE.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Libs\OpenXML\LICENSE.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Libs\PdfPig\LICENSE.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Libs\QuestPDF\LICENSE.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Libs\Tesseract\LICENSE.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Libs\WPF-UI\LICENSE.txt">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>

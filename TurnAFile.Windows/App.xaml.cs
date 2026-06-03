@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using TurnAFile.Core.Helpers;
+using TurnAFile.Core.Models;
 using TurnAFile.Core.Services;
 using TurnAFile.Windows.Services;
 using TurnAFile.Windows.Views;
@@ -218,6 +219,8 @@ public partial class App : System.Windows.Application
             return;
         }
 
+        args.Quality = ResolveQuality(args.Quality, args.MediaType);
+
         string outputPath = ConversionHelpers.GetOutputPath(args.InputPath, args.Format);
         var cts = new CancellationTokenSource();
         var progressWindow = new ConversionProgressWindow();
@@ -424,13 +427,52 @@ public partial class App : System.Windows.Application
         return result;
     }
 
+    private static string ResolveQuality(string? quality, string mediaType)
+    {
+        if (!string.IsNullOrEmpty(quality) && quality != "default")
+            return quality;
+
+        try
+        {
+            var config = new ConfigurationService();
+            var (video, audio, image) = config.LoadQualitySettings();
+
+            return mediaType.ToLowerInvariant() switch
+            {
+                "video" => video switch
+                {
+                    VideoQuality.High => "high",
+                    VideoQuality.Low => "low",
+                    _ => "medium"
+                },
+                "audio" => audio switch
+                {
+                    AudioQuality.High => "high",
+                    AudioQuality.Low => "low",
+                    _ => "medium"
+                },
+                "image" => image switch
+                {
+                    ImageScaling.Original => "high",
+                    ImageScaling.FiftyPercent => "low",
+                    _ => "medium"
+                },
+                _ => "medium"
+            };
+        }
+        catch
+        {
+            return "medium";
+        }
+    }
+
     private class ConversionArgs
     {
         public bool IsAddMode { get; set; }
         public bool IsConvertMode { get; set; }
         public string InputPath { get; set; } = string.Empty;
         public string Format { get; set; } = "mp4";
-        public string Quality { get; set; } = "medium";
+        public string Quality { get; set; } = "";
         public string MediaType { get; set; } = "video";
     }
 

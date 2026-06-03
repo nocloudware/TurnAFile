@@ -1,44 +1,43 @@
-
 # TurnAFile
 
-> Conversor multimedia y de documentos todo-en-uno para Windows.  
-> Convierte video, audio, imágenes, documentos, datos y más — sin complicaciones.
+> All-in-one media and document converter for Windows.
+> Convert video, audio, images, documents, data, and more — no hassle.
 
 ---
 
-## ✨ Funcionalidades
+## ✨ Features
 
-### 🎬 Conversión de video
-| Entrada | Formatos de salida |
-|---------|-------------------|
-| MP4, AVI, MKV, WEBM, MOV | MP4, AVI, MKV, WEBM, MOV, **MP3**, **M4A** |
+### 🎬 Video Conversion
+| Input | Output Formats |
+|-------|---------------|
+| MP4, AVI, MKV, WEBM, MOV, WMV, FLV | MP4, AVI, MKV, WEBM, MOV, **MP3**, **M4A** |
 
-- Conversión entre formatos de video
-- Extracción de audio desde video (MP3, M4A)
-- Calidad ajustable: Alta / Media / Baja
-- Conversión por lotes
+- Convert between video formats
+- Extract audio from video (MP3, M4A)
+- Adjustable quality: High / Medium / Low
+- Batch conversion
 
-### 🎵 Conversión de audio
-| Entrada | Formatos de salida |
-|---------|-------------------|
-| MP3, WAV, M4A, FLAC, OGG | MP3, WAV, M4A, FLAC, OGG |
+### 🎵 Audio Conversion
+| Input | Output Formats |
+|-------|---------------|
+| MP3, WAV, M4A, FLAC, OGG, AAC, WMA | MP3, WAV, M4A, FLAC, OGG |
 
-- Conversión entre formatos de audio
-- Calidad ajustable: Alta / Media / Baja
+- Convert between audio formats
+- Adjustable quality: High / Medium / Low
 
-### 🖼️ Conversión de imágenes
-| Entrada | Formatos de salida |
-|---------|-------------------|
-| JPG, PNG, WEBP, GIF, BMP | JPG, PNG, WEBP, GIF, BMP, **PDF**, **OCR** |
+### 🖼️ Image Conversion
+| Input | Output Formats |
+|-------|---------------|
+| JPG, JPEG, PNG, WEBP, GIF, BMP, TIFF | JPG, PNG, WEBP, GIF, BMP, TIFF, **PDF**, **TXT (OCR)** |
 
-- Redimensionado con calidad ajustable (Original / 75% / 50%)
-- Conversión de imagen a PDF
-- **OCR**: Reconocimiento óptico de caracteres a TXT, DOCX, XLSX o PDF
+- Resize with adjustable quality (Original / 75% / 50%)
+- Image to PDF conversion
+- **OCR**: Optical Character Recognition to TXT
 
-### 📄 Conversión de documentos
+### 📄 Document Conversion
 
-| Entrada | Formatos de salida |
-|---------|-------------------|
+| Input | Output Formats |
+|-------|---------------|
 | DOCX | DOCX, PDF, TXT, MD, HTML, EPUB |
 | TXT | TXT, DOCX, HTML, **PDF** |
 | HTML / HTM | HTML, DOCX, TXT, **PDF** |
@@ -48,72 +47,72 @@
 | PDF | TXT, DOCX, HTML, EPUB, MD |
 | EPUB | TXT, HTML, EPUB, DOCX, PDF, MD |
 
-- Preserva formato en DOCX → PDF (headings, bold, italic, color, font, tablas, imágenes)
-- HTML → PDF con resaltado de sintaxis (modo código VS Code)
-- EPUB → PDF con contenido renderizado como libro
+- Preserves formatting in DOCX → PDF (headings, bold, italic, color, font, tables, images)
+- HTML → PDF with syntax highlighting (VS Code style)
+- EPUB → PDF with book-style rendered content
 
-### 📊 Conversión de datos
+### 📊 Data Conversion
 
-| Entrada | Formatos de salida |
-|---------|-------------------|
-| XLSX / XLS | XLSX, CSV, JSON, **PDF** |
+| Input | Output Formats |
+|-------|---------------|
+| XLSX | XLSX, CSV, JSON, **PDF** |
 | CSV | CSV, XLSX, JSON, **PDF** |
 | JSON | JSON, CSV, XLSX, **PDF** |
 
-- Tablas optimizadas para PDF con escalado de fuente y columnas
-- Soporte para archivos grandes con columnas anchas
+- PDF tables optimized with font scaling and column wrapping
+- Support for large files with wide columns
 
 ---
 
-## 🔧 Funcionamiento
+## 🔧 How It Works
 
-### Interfaz
-- Ventana única con selector de archivos (arrastrar y soltar)
-- Panel lateral de formato y calidad
-- Progreso en ventana separada con cancelación
-- Menú contextual en el Explorador de Windows ("Convertir con TurnAFile")
-- Temas claro y oscuro
-- Multiidioma: Español, English, Français, Deutsch, 中文, 日本語
+### Interface
+- Single window with file selector (drag and drop)
+- Side panel for format and quality selection
+- Progress in separate window with cancellation
+- Windows Explorer context menu — right-click any supported file to convert directly
+- Light and dark themes
+- Multi-language: English, Español, Français, Deutsch, 中文, 日本語, Português
 
-### Conversión por lotes
-- Procesa múltiples archivos simultáneamente
-- Cada archivo con su formato y calidad individual
-- Ventana de progreso con cancelación
-- Log de conversión con resultados
+### Batch Conversion
+- Process multiple files simultaneously
+- Each file with its own format and quality settings
+- Progress window with cancellation
+- Conversion log with results
 
 ### OCR
-- Extrae texto de imágenes usando Tesseract OCR
-- Resultados exportables a TXT, DOCX, XLSX o PDF
-- Detecta automáticamente el idioma del sistema
+- Extract text from images using Tesseract OCR
+- Export results to TXT
+- Auto-detects system language
 
 ---
 
-## 🚀 Instalación
+## 🚀 Installation
 
-1. Descarga la última versión desde [Releases](https://github.com/nocloudware/TurnAFile/releases)
-2. Extrae el archivo ZIP en una carpeta
-3. Ejecuta `TurnAFile.exe`
+1. Download the latest version from [Releases](https://github.com/nocloudware/TurnAFile/releases)
+2. Extract the ZIP file to a folder
+3. Run `TurnAFile.exe`
 
-**Requisitos:** Windows 10/11 (64-bit), .NET 8.0 Runtime
-
----
-
-## 🛠️ Tecnologías
-
-| Componente | Propósito | Licencia |
-|-----------|-----------|----------|
-| **.NET 8.0 WPF** | Framework de la aplicación | MIT |
-| **FFmpeg** | Conversión de video/audio | LGPL/GPL |
-| **QuestPDF** | Generación de PDF | MIT Community |
-| **Open XML SDK** | Lectura/escritura DOCX | MIT |
-| **ClosedXML** | Lectura/escritura XLSX | MIT |
-| **Tesseract OCR** | Reconocimiento óptico de caracteres | Apache 2.0 |
-| **PdfPig** | Extracción de texto de PDF | Apache 2.0 |
-| **WPF-UI** | Biblioteca de controles modernos | MIT |
+**Requirements:** Windows 10/11 (64-bit), .NET 8.0 Runtime
 
 ---
 
-## 📝 Licencia
+## 🛠️ Technologies
 
-TurnAFile es software gratuito bajo licencia MIT.  
-Ver [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt) para licencias de componentes de terceros.
+| Component | Purpose | License |
+|-----------|---------|---------|
+| **.NET 8.0 WPF** | Application framework | MIT |
+| **FFmpeg** | Video/audio conversion | LGPL/GPL |
+| **QuestPDF** | PDF generation | MIT Community |
+| **Open XML SDK** | DOCX read/write | MIT |
+| **ClosedXML** | XLSX read/write | MIT |
+| **Tesseract OCR** | Optical Character Recognition | Apache 2.0 |
+| **PdfPig** | PDF text extraction | Apache 2.0 |
+| **WPF-UI** | Modern UI controls library | MIT |
+
+---
+
+## 📝 License
+
+TurnAFile is free software under the MIT License.
+See [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt) for third-party component licenses.

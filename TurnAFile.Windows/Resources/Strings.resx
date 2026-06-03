@@ -420,6 +420,9 @@ Would you like to continue?</value>
   <data name="LanguageJapanese" xml:space="preserve">
     <value>日本語</value>
   </data>
+  <data name="LanguagePortuguese" xml:space="preserve">
+    <value>Português</value>
+  </data>
   <!-- License Status -->
   <data name="LicenseStatusLicensed" xml:space="preserve">
     <value>Status: Licensed</value>

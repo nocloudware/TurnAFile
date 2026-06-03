@@ -21,7 +21,6 @@ public class OcrConverter
 
         try
         {
-            // Verificar que el archivo existe
             if (!File.Exists(inputPath))
             {
                 result.Success = false;
@@ -29,7 +28,6 @@ public class OcrConverter
                 return result;
             }
 
-            // Perform OCR using Tesseract
             string extractedText = await PerformOcrAsync(inputPath, cancellationToken);
 
             if (cancellationToken.IsCancellationRequested)
@@ -46,27 +44,15 @@ public class OcrConverter
                 return result;
             }
 
-            // Guardar según formato destino
             string target = targetFormat.ToLower();
-
-            if (target == "txt")
-            {
-                await File.WriteAllTextAsync(outputPath, extractedText, cancellationToken);
-            }
-            else if (target == "docx")
-            {
-                await ConvertTextToDocxAsync(extractedText, outputPath, cancellationToken);
-            }
-            else if (target == "xlsx")
-            {
-                await ConvertTextToExcelAsync(extractedText, outputPath, cancellationToken);
-            }
-            else
+            if (target != "txt")
             {
                 result.Success = false;
-                result.ErrorMessage = $"Formato no soportado para OCR: {targetFormat}";
+                result.ErrorMessage = $"OCR solo admite salida a TXT (recibido: {targetFormat})";
                 return result;
             }
+
+            await File.WriteAllTextAsync(outputPath, extractedText, cancellationToken);
 
             result.Success = true;
             result.OutputPath = outputPath;
@@ -94,10 +80,9 @@ public class OcrConverter
             return await Task.Run(() =>
             {
                 ct.ThrowIfCancellationRequested();
-                
-                // Find tessdata path (bundled with app or system)
+
                 string tessdataPath = FindTessdataPath()!;
-                
+
                 if (string.IsNullOrEmpty(tessdataPath) || !Directory.Exists(tessdataPath))
                 {
                     throw new InvalidOperationException(
@@ -107,26 +92,24 @@ public class OcrConverter
                         "jpn, nld, pol, tur, vie\n\n" +
                         "Descargue desde: https://github.com/tesseract-ocr/tessdata");
                 }
-                
-                // Available languages in the project
+
                 var languages = new[] { "spa", "eng", "fra", "deu", "ita", "por", "rus", "ara", "kor", "jpn", "nld", "pol", "tur", "vie" };
-                
+
                 string text = string.Empty;
-                
-                // Try each available language
+
                 foreach (var lang in languages)
                 {
                     var trainedDataFile = Path.Combine(tessdataPath, $"{lang}.traineddata");
                     if (!File.Exists(trainedDataFile))
                         continue;
-                        
+
                     try
                     {
                         using var engine = new TesseractEngine(tessdataPath, lang, EngineMode.Default);
                         using var img = Pix.LoadFromFile(inputPath);
                         using var page = engine.Process(img);
                         text = page.GetText();
-                        
+
                         if (!string.IsNullOrWhiteSpace(text) && text.Trim().Length > 2)
                         {
                             System.Diagnostics.Debug.WriteLine($"OCR success with language: {lang}");
@@ -138,7 +121,7 @@ public class OcrConverter
                         System.Diagnostics.Debug.WriteLine($"OCR failed with {lang}: {ex.Message}");
                     }
                 }
-                
+
                 return string.Empty;
             }, ct);
         }
@@ -151,22 +134,20 @@ public class OcrConverter
             throw new InvalidOperationException($"Error en OCR: {ex.Message}", ex);
         }
     }
-    
+
     private string? FindTessdataPath()
     {
-        // Check in app's tools folder (where .traineddata files are copied)
         string[] searchPaths = new[]
         {
             Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tools", "tessdata"),
             Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tessdata"),
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TurnAFile", "tessdata"),
         };
-        
+
         foreach (var path in searchPaths)
         {
             if (Directory.Exists(path))
             {
-                // Check if it has at least one traineddata file
                 var files = Directory.GetFiles(path, "*.traineddata");
                 if (files.Length > 0)
                 {
@@ -174,59 +155,7 @@ public class OcrConverter
                 }
             }
         }
-        
+
         return null;
-    }
-
-    private async Task ConvertTextToDocxAsync(string text, string outputPath, CancellationToken ct)
-    {
-        // Create DOCX using Open XML SDK
-        await CreateDocxFromTextAsync(text, outputPath, ct);
-    }
-
-    private async Task CreateDocxFromTextAsync(string text, string outputPath, CancellationToken ct)
-    {
-        await Task.Run(() =>
-        {
-            using var doc = DocumentFormat.OpenXml.Packaging.WordprocessingDocument.Create(
-                outputPath, DocumentFormat.OpenXml.WordprocessingDocumentType.Document);
-
-            var mainPart = doc.AddMainDocumentPart();
-            mainPart.Document = new DocumentFormat.OpenXml.Wordprocessing.Document();
-            var body = mainPart.Document.AppendChild(new DocumentFormat.OpenXml.Wordprocessing.Body());
-
-            var lines = text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
-            foreach (var line in lines)
-            {
-                if (ct.IsCancellationRequested) break;
-
-                var para = new DocumentFormat.OpenXml.Wordprocessing.Paragraph();
-                var run = new DocumentFormat.OpenXml.Wordprocessing.Run(
-                    new DocumentFormat.OpenXml.Wordprocessing.Text(line.Trim()));
-                para.Append(run);
-                body.Append(para);
-            }
-
-            mainPart.Document.Save();
-        }, ct);
-    }
-
-    private async Task ConvertTextToExcelAsync(string text, string outputPath, CancellationToken ct)
-    {
-        // Convertir texto a Excel usando ClosedXML
-        using var workbook = new ClosedXML.Excel.XLWorkbook();
-        var worksheet = workbook.AddWorksheet("OCR Result");
-
-        var lines = text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
-        for (int i = 0; i < lines.Length && i < 10000; i++) // Límite por seguridad
-        {
-            if (ct.IsCancellationRequested)
-                break;
-
-            worksheet.Cell(i + 1, 1).Value = lines[i];
-        }
-
-        workbook.SaveAs(outputPath);
-        await Task.CompletedTask;
     }
 }

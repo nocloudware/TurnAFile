@@ -65,6 +65,7 @@ public sealed class StringsWrapper : INotifyPropertyChanged
     public string ShellMenuSaveAsTXT => Strings.ShellMenuSaveAsTXT;
     public string ShellMenuSaveAsDOCX => Strings.ShellMenuSaveAsDOCX;
     public string ShellMenuSaveAsXLSX => Strings.ShellMenuSaveAsXLSX;
+    public string ShellMenuConvertTo(string format) => string.Format(Strings.ShellMenuConvertTo, format);
 
     public string ConversionInProgress => Strings.ConversionInProgress;
     public string SelectFilesMessage => Strings.SelectFilesMessage;
@@ -99,6 +100,7 @@ public sealed class StringsWrapper : INotifyPropertyChanged
     public string LanguageGerman => Strings.LanguageGerman;
     public string LanguageChinese => Strings.LanguageChinese;
     public string LanguageJapanese => Strings.LanguageJapanese;
+    public string LanguagePortuguese => Strings.LanguagePortuguese;
 
     // Conversion Progress
     public string ProcessingFile(int current, int total) => string.Format(Strings.ProcessingFile, current, total);
@@ -211,6 +213,7 @@ public sealed class StringsWrapper : INotifyPropertyChanged
         { "Français", new CultureInfo("fr") },
         { "Deutsch", new CultureInfo("de") },
         { "中文", new CultureInfo("zh") },
-        { "日本語", new CultureInfo("ja") }
+        { "日本語", new CultureInfo("ja") },
+        { "Português", new CultureInfo("pt") }
     };
 }

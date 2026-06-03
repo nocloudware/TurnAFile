@@ -6,7 +6,7 @@ public static class SupportedFormats
 {
     public static List<string> DocumentFormats { get; } = new()
     {
-        "DOCX", "PDF", "MD", "HTML", "EPUB", "TXT"
+        "DOCX", "PDF", "MD", "MARKDOWN", "HTML", "HTM", "EPUB", "TXT", "RTF", "ODT"
     };
 
     public static List<string> DataFormats { get; } = new()
@@ -14,23 +14,18 @@ public static class SupportedFormats
         "XLSX", "CSV", "JSON", "PDF"
     };
 
-    public static List<string> OcrFormats { get; } = new()
-    {
-        "TXT", "DOCX", "XLSX", "PDF"
-    };
-
     public static List<string> VideoFormats { get; } = new()
     {
-        "MP4", "AVI", "MKV", "WEBM", "MOV"
+        "MP4", "AVI", "MKV", "WEBM", "MOV", "WMV", "FLV"
     };
 
     public static List<string> AudioFormats { get; } = new()
     {
-        "MP3", "WAV", "M4A", "FLAC", "OGG"
+        "MP3", "WAV", "M4A", "FLAC", "OGG", "AAC", "WMA"
     };
 
     public static List<string> ImageFormats { get; } = new()
     {
-        "JPG", "PNG", "WEBP", "GIF", "BMP"
+        "JPG", "JPEG", "PNG", "WEBP", "GIF", "BMP", "TIFF"
     };
 }

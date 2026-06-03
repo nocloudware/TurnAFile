@@ -355,6 +355,9 @@ Voulez-vous continuer ?</value>
   <data name="LanguageJapanese" xml:space="preserve">
     <value>日本語</value>
   </data>
+  <data name="LanguagePortuguese" xml:space="preserve">
+    <value>Português</value>
+  </data>
 
   <!-- License Status -->
   <data name="LicenseStatusLicensed" xml:space="preserve">
@@ -547,11 +550,11 @@ Voulez-vous continuer ?</value>
   <data name="AboutClosedXMLDesc" xml:space="preserve">
     <value>Traitement des fichiers Excel</value>
   </data>
-  <data name="AboutPDFsharp" xml:space="preserve">
-    <value>PDFsharp</value>
+  <data name="AboutQuestPDF" xml:space="preserve">
+    <value>QuestPDF</value>
   </data>
-  <data name="AboutPDFsharpDesc" xml:space="preserve">
-    <value>Generation de documents PDF</value>
+  <data name="AboutQuestPDFDesc" xml:space="preserve">
+    <value>Génération de documents PDF</value>
   </data>
   <data name="AboutOpenXML" xml:space="preserve">
     <value>Open XML SDK</value>
@@ -563,13 +566,13 @@ Voulez-vous continuer ?</value>
     <value>Remerciements spéciaux</value>
   </data>
   <data name="AboutSpecialThanksMessage" xml:space="preserve">
-    <value>Aux communautés FFmpeg, PDFsharp, ClosedXML et Open XML pour leur travail incroyable.</value>
+    <value>Aux communautés FFmpeg, QuestPDF, Open XML SDK, ClosedXML et Tesseract pour leur travail incroyable.</value>
   </data>
   <data name="AboutTechnologiesUsed" xml:space="preserve">
     <value>Technologies utilisées</value>
   </data>
   <data name="AboutTechList" xml:space="preserve">
-    <value>.NET 8.0, WPF, FFmpeg, PDFsharp, ClosedXML, Open XML SDK</value>
+    <value>.NET 8.0, WPF, WPF-UI, FFmpeg, QuestPDF, Open XML SDK, ClosedXML, Tesseract OCR</value>
   </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>Licence</value>

@@ -355,6 +355,9 @@
   <data name="LanguageJapanese" xml:space="preserve">
     <value>日本語</value>
   </data>
+  <data name="LanguagePortuguese" xml:space="preserve">
+    <value>Português</value>
+  </data>
 
   <!-- License Status -->
   <data name="LicenseStatusLicensed" xml:space="preserve">
@@ -547,10 +550,10 @@
   <data name="AboutClosedXMLDesc" xml:space="preserve">
     <value>Excel 文件处理</value>
   </data>
-  <data name="AboutPDFsharp" xml:space="preserve">
-    <value>PDFsharp</value>
+  <data name="AboutQuestPDF" xml:space="preserve">
+    <value>QuestPDF</value>
   </data>
-  <data name="AboutPDFsharpDesc" xml:space="preserve">
+  <data name="AboutQuestPDFDesc" xml:space="preserve">
     <value>PDF 文档生成</value>
   </data>
   <data name="AboutOpenXML" xml:space="preserve">
@@ -563,13 +566,13 @@
     <value>特别感谢</value>
   </data>
   <data name="AboutSpecialThanksMessage" xml:space="preserve">
-    <value>感谢 FFmpeg、PDFsharp、ClosedXML 和 Open XML 社区的出色工作。</value>
+    <value>感谢 FFmpeg、QuestPDF、Open XML SDK、ClosedXML 和 Tesseract 社区的出色工作。</value>
   </data>
   <data name="AboutTechnologiesUsed" xml:space="preserve">
     <value>使用的技术</value>
   </data>
   <data name="AboutTechList" xml:space="preserve">
-    <value>.NET 8.0, WPF, FFmpeg, PDFsharp, ClosedXML, Open XML SDK</value>
+    <value>.NET 8.0, WPF, WPF-UI, FFmpeg, QuestPDF, Open XML SDK, ClosedXML, Tesseract OCR</value>
   </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>许可证</value>

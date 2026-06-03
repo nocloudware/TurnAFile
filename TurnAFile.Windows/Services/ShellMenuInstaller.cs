@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Microsoft.Win32;
+using TurnAFile.Windows.Resources;
 
 namespace TurnAFile.Windows.Services;
 
@@ -31,27 +32,30 @@ public static class ShellMenuInstaller
         { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp", ".tiff" };
 
     private static readonly string[] DocumentExtensions =
-        { ".docx", ".pdf", ".md", ".markdown", ".html", ".htm", ".epub", ".txt" };
+        { ".docx", ".pdf", ".md", ".markdown", ".html", ".htm", ".epub", ".txt", ".rtf", ".odt" };
 
     private static readonly string[] DataExtensions =
         { ".xlsx", ".csv", ".json" };
 
     private static readonly string[] VideoFormats = { "MP4", "AVI", "MKV", "WEBM", "MOV", "MP3", "M4A" };
     private static readonly string[] AudioFormats = { "MP3", "WAV", "M4A", "FLAC", "OGG" };
-    private static readonly string[] ImageFormats = { "JPG", "PNG", "WEBP", "GIF", "BMP", "PDF" };
-    private static readonly string[] DocumentFormats = { "DOCX", "PDF", "MD", "HTML", "EPUB", "TXT" };
+    private static readonly string[] ImageFormats = { "JPG", "PNG", "WEBP", "GIF", "BMP", "TIFF", "PDF", "TXT (OCR)" };
+    private const string OcrDisplay = "TXT (OCR)";
+    private static readonly string[] DocumentFormats = { "DOCX", "PDF", "MD", "HTML", "EPUB", "TXT", "RTF", "ODT" };
     private static readonly string[] DataFormats = { "XLSX", "CSV", "JSON", "PDF" };
-    private static readonly string[] OcrFormats = { "TXT", "DOCX", "XLSX" };
 
-    // Resuelve Assets\Icons\ relativa al exe en tiempo de ejecución
     private static string IconsDirectory =>
         Path.Combine(
             Path.GetDirectoryName(
                 System.Diagnostics.Process.GetCurrentProcess().MainModule!.FileName)!,
             "Assets", "Icons");
 
+    private static StringsWrapper S => StringsWrapper.Instance;
+
     public static void Install()
     {
+        Uninstall();
+        Thread.Sleep(200);
         string exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule!.FileName;
 
         foreach (var ext in VideoExtensions)
@@ -84,7 +88,6 @@ public static class ShellMenuInstaller
             RegisterSimpleExtension(ext, DataFormats, exePath);
         }
 
-        // Force Windows Explorer to refresh context menu cache
         SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
     }
 
@@ -107,7 +110,7 @@ public static class ShellMenuInstaller
     {
         Uninstall();
         Thread.Sleep(500);
-        Install(); // Re-extracts icons + reinstalls registry
+        Install();
     }
 
     public static bool IsInstalled()
@@ -124,7 +127,7 @@ public static class ShellMenuInstaller
         string path = $@"Software\Classes\SystemFileAssociations\{ext}\shell\{AddEntryName}";
 
         using var key = Registry.CurrentUser.CreateSubKey(path);
-        key.SetValue(MUIVerbKey, "Agregar a TurnAFile");
+        key.SetValue(MUIVerbKey, S.ShellMenuAddEntry);
         key.SetValue(IconKey, $"\"{exePath}\",0");
         key.SetValue("MultiSelectModel", "Player");
 
@@ -138,7 +141,7 @@ public static class ShellMenuInstaller
         string basePath = $@"Software\Classes\SystemFileAssociations\{ext}\shell\{AppName}";
 
         using var rootKey = Registry.CurrentUser.CreateSubKey(basePath);
-        rootKey.SetValue(MUIVerbKey, "Convertir con TurnAFile");
+        rootKey.SetValue(MUIVerbKey, S.ShellMenuConvertWith);
         rootKey.SetValue(IconKey, $"\"{exePath}\",0");
         rootKey.SetValue(SubCmdsKey, string.Empty);
 
@@ -147,16 +150,15 @@ public static class ShellMenuInstaller
         int order = 1;
         foreach (var format in formats)
         {
-            string formatPath = $@"{basePath}\shell\{order:D2}_{format}";
+            string fmtKey = format.Replace(" ", "_");
+            string formatPath = $@"{basePath}\shell\{order:D2}_{fmtKey}";
             order++;
 
+            string cmd = $"\"{exePath}\" --convert \"%1\" --format \"{format.ToLower()}\" --type \"{category}\"";
             using var formatItem = Registry.CurrentUser.CreateSubKey(formatPath);
-            formatItem.SetValue(MUIVerbKey, $"Convertir a {format}");
-            formatItem.SetValue(SubCmdsKey, string.Empty);
-
-            RegisterQualityItem(formatPath, "1_Alta", "Calidad Alta", exePath, format, "high", category);
-            RegisterQualityItem(formatPath, "2_Media", "Calidad Media", exePath, format, "medium", category);
-            RegisterQualityItem(formatPath, "3_Baja", "Calidad Baja", exePath, format, "low", category);
+            formatItem.SetValue(MUIVerbKey, S.ShellMenuConvertTo(format));
+            using var cmdKey = Registry.CurrentUser.CreateSubKey($@"{formatPath}\command");
+            cmdKey.SetValue("", cmd);
         }
     }
 
@@ -166,37 +168,26 @@ public static class ShellMenuInstaller
         string basePath = $@"Software\Classes\SystemFileAssociations\{ext}\shell\{AppName}";
 
         using var rootKey = Registry.CurrentUser.CreateSubKey(basePath);
-        rootKey.SetValue(MUIVerbKey, "Convertir con TurnAFile");
+        rootKey.SetValue(MUIVerbKey, S.ShellMenuConvertWith);
         rootKey.SetValue(IconKey, $"\"{exePath}\",0");
         rootKey.SetValue(SubCmdsKey, string.Empty);
-
-        var category = GetCategoryFromExtension(ext);
 
         int order = 1;
         foreach (var format in formats)
         {
-            string formatPath = $@"{basePath}\shell\{order:D2}_{format}";
+            string fmtKey = format.Replace(" ", "_");
+            string formatPath = $@"{basePath}\shell\{order:D2}_{fmtKey}";
             order++;
 
             using var formatItem = Registry.CurrentUser.CreateSubKey(formatPath);
-            formatItem.SetValue(MUIVerbKey, $"Convertir a {format}");
-            formatItem.SetValue(SubCmdsKey, string.Empty);
+            formatItem.SetValue(MUIVerbKey, S.ShellMenuConvertTo(format));
 
-            RegisterQualityItem(formatPath, "1_Alta", "Calidad Alta", exePath, format, "high", category);
-            RegisterQualityItem(formatPath, "2_Media", "Calidad Media", exePath, format, "medium", category);
-            RegisterQualityItem(formatPath, "3_Baja", "Calidad Baja", exePath, format, "low", category);
+            string type = format == "TXT (OCR)" ? "ocr" : "image";
+            string fmt = format == "TXT (OCR)" ? "txt" : format.ToLower();
+            string cmd = $"\"{exePath}\" --convert \"%1\" --format \"{fmt}\" --type \"{type}\"";
+            using var cmdKey = Registry.CurrentUser.CreateSubKey($@"{formatPath}\command");
+            cmdKey.SetValue("", cmd);
         }
-
-        // Agregar submenú OCR
-        string ocrPath = $@"{basePath}\shell\{order:D2}_OCR";
-        using var ocrItem = Registry.CurrentUser.CreateSubKey(ocrPath);
-        ocrItem.SetValue(MUIVerbKey, "Extraer texto (OCR)");
-        ocrItem.SetValue(SubCmdsKey, string.Empty);
-
-        // Opciones de formato OCR
-        RegisterOcrFormatItem(ocrPath, "1_TXT", "Guardar como TXT", exePath, "txt");
-        RegisterOcrFormatItem(ocrPath, "2_DOCX", "Guardar como DOCX", exePath, "docx");
-        RegisterOcrFormatItem(ocrPath, "3_XLSX", "Guardar como XLSX", exePath, "xlsx");
     }
 
     private static void RegisterSimpleExtension(
@@ -205,7 +196,7 @@ public static class ShellMenuInstaller
         string basePath = $@"Software\Classes\SystemFileAssociations\{ext}\shell\{AppName}";
 
         using var rootKey = Registry.CurrentUser.CreateSubKey(basePath);
-        rootKey.SetValue(MUIVerbKey, "Convertir con TurnAFile");
+        rootKey.SetValue(MUIVerbKey, S.ShellMenuConvertWith);
         rootKey.SetValue(IconKey, $"\"{exePath}\",0");
         rootKey.SetValue(SubCmdsKey, string.Empty);
 
@@ -217,41 +208,12 @@ public static class ShellMenuInstaller
             string formatPath = $@"{basePath}\shell\{order:D2}_{format}";
             order++;
 
-            // Register command directly on the format item (no quality submenus)
-            string cmd = $"\"{exePath}\" --convert \"%1\" --format \"{format.ToLower()}\" --quality \"medium\" --type \"{category}\"";
-
+            string cmd = $"\"{exePath}\" --convert \"%1\" --format \"{format.ToLower()}\" --type \"{category}\"";
             using var formatItem = Registry.CurrentUser.CreateSubKey(formatPath);
-            formatItem.SetValue(MUIVerbKey, $"Convertir a {format}");
+            formatItem.SetValue(MUIVerbKey, S.ShellMenuConvertTo(format));
             using var cmdKey = Registry.CurrentUser.CreateSubKey($@"{formatPath}\command");
             cmdKey.SetValue("", cmd);
         }
-    }
-
-    private static void RegisterQualityItem(
-        string parentPath, string keyName, string label,
-        string exePath, string format, string quality, string category)
-    {
-        string fullPath = $@"{parentPath}\shell\{keyName}";
-        using var item = Registry.CurrentUser.CreateSubKey(fullPath);
-        item.SetValue(MUIVerbKey, label);
-
-        // Register command to launch conversion
-        string cmd = $"\"{exePath}\" --convert \"%1\" --format \"{format.ToLower()}\" --quality \"{quality}\" --type \"{category}\"";
-        using var cmdKey = Registry.CurrentUser.CreateSubKey($@"{fullPath}\command");
-        cmdKey.SetValue("", cmd);
-    }
-
-    private static void RegisterOcrFormatItem(
-        string parentPath, string keyName, string label, string exePath, string format)
-    {
-        string fullPath = $@"{parentPath}\shell\{keyName}";
-        using var item = Registry.CurrentUser.CreateSubKey(fullPath);
-        item.SetValue(MUIVerbKey, label);
-
-        // Register command to launch OCR conversion
-        string cmd = $"\"{exePath}\" --convert \"%1\" --format \"{format.ToLower()}\" --quality \"medium\" --type \"ocr\"";
-        using var cmdKey = Registry.CurrentUser.CreateSubKey($@"{fullPath}\command");
-        cmdKey.SetValue("", cmd);
     }
 
     private static string GetCategoryFromExtension(string ext)

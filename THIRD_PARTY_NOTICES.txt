@@ -17,6 +17,7 @@ Website:      https://ffmpeg.org/
 Source:       https://www.gyan.dev/ffmpeg/builds/
 
 License File: Tools\FFmpeg\LICENSE.txt
+License URL: https://www.gnu.org/licenses/gpl-3.0.txt
 
 Note: FFmpeg is distributed as a separate executable. TurnAFile invokes FFmpeg
 as an external process and is not linked against it.
@@ -26,9 +27,10 @@ as an external process and is not linked against it.
 ================================================================================
 Component:    ClosedXML.dll
 License:      MIT License
-Copyright:    Copyright (c) 2013 ClosedXML
+Copyright:    Copyright (c) 2016 ClosedXML
 Website:      https://github.com/ClosedXML/ClosedXML
 Source:       https://www.nuget.org/packages/ClosedXML/
+License File: Libs\ClosedXML\LICENSE.txt
 
 Note: Used for reading/writing Excel (.xlsx) files.
 
@@ -40,6 +42,7 @@ License:      MIT License (Community)
 Copyright:    Copyright (c) QuestPDF contributors
 Website:      https://www.questpdf.com/
 Source:       https://www.nuget.org/packages/QuestPDF/
+License File: Libs\QuestPDF\LICENSE.txt
 
 Note: Used for PDF generation (text, tables, images, formatted documents).
 Community license: free for individuals, non-profits, and businesses under $1M annual revenue.
@@ -49,9 +52,10 @@ Community license: free for individuals, non-profits, and businesses under $1M a
 ================================================================================
 Component:    DocumentFormat.OpenXml.dll
 License:      MIT License
-Copyright:    Copyright (c) Microsoft Corporation
+Copyright:    Copyright (c) .NET Foundation and Contributors
 Website:      https://github.com/OfficeDev/Open-XML-SDK
 Source:       https://www.nuget.org/packages/DocumentFormat.OpenXml/
+License File: Libs\OpenXML\LICENSE.txt
 
 Note: Used for reading/writing Word (.docx) files with full formatting preservation.
 
@@ -63,6 +67,7 @@ License:      Apache License 2.0
 Copyright:    Copyright (c) PdfPig contributors
 Website:      https://github.com/UglyToad/PdfPig
 Source:       https://www.nuget.org/packages/PdfPig/
+License File: Libs\PdfPig\LICENSE.txt
 
 Note: Used for extracting text and structure from PDF files.
 
@@ -74,6 +79,7 @@ License:      Apache License 2.0
 Copyright:    Copyright (c) Tesseract contributors
 Website:      https://github.com/charlesw/tesseract
 Source:       https://www.nuget.org/packages/Tesseract/
+License File: Libs\Tesseract\LICENSE.txt
 
 Note: Used for optical character recognition (OCR) of text in images and PDFs.
 
@@ -83,8 +89,9 @@ Note: Used for optical character recognition (OCR) of text in images and PDFs.
 Component:    WpfUi.dll
 License:      MIT License
 Copyright:    Copyright (c) WPF-UI contributors
-Website:      https://wpfui.lepo.co/
+Website:      https://github.com/lepojo/WPF-UI
 Source:       https://www.nuget.org/packages/WPF-UI/
+License File: Libs\WPF-UI\LICENSE.txt
 
 Note: Modern WPF UI controls library used for the application interface.
 
@@ -117,6 +124,7 @@ License:      Apache License 2.0
 Copyright:    Copyright (c) Tesseract contributors
 Website:      https://github.com/charlesw/tesseract
 Source:       https://www.nuget.org/packages/Tesseract.Drawing/
+License File: Libs\Tesseract\LICENSE.txt
 
 Note: Image processing support for Tesseract OCR.
 
@@ -206,7 +214,17 @@ TurnAFile preserves PDF/document formatting through a combination of:
 VIEWING FULL LICENSE TEXTS
 --------------------------
 Full license texts are available in the installation folder under "Tools" and "Libs"
-subfolders, or via Help > About > View Licenses in the application.
+subfolders at the following paths:
+
+  - Tools\FFmpeg\LICENSE.txt    — FFmpeg (GPLv3)
+  - Libs\QuestPDF\LICENSE.txt   — QuestPDF (MIT Community)
+  - Libs\OpenXML\LICENSE.txt    — Open XML SDK (MIT)
+  - Libs\ClosedXML\LICENSE.txt  — ClosedXML (MIT)
+  - Libs\PdfPig\LICENSE.txt     — PdfPig (Apache 2.0)
+  - Libs\Tesseract\LICENSE.txt  — Tesseract (Apache 2.0)
+  - Libs\WPF-UI\LICENSE.txt     — WPF-UI (MIT)
+
+Or via Help > About > View Licenses in the application.
 
 ================================================================================
 END OF THIRD-PARTY NOTICES

@@ -1033,7 +1033,7 @@ p { margin: 0.5em 0; }
     {
         return extension.ToLower() switch
         {
-            ".docx" or ".pdf" or ".md" or ".markdown" or ".html" or ".htm" or ".epub" or ".txt" => true,
+            ".docx" or ".pdf" or ".md" or ".markdown" or ".html" or ".htm" or ".epub" or ".txt" or ".rtf" or ".odt" => true,
             _ => false
         };
     }
