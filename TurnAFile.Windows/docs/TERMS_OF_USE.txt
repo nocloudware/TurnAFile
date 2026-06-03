@@ -1,0 +1,140 @@
+\# Terms of Use - TurnAFile
+
+
+
+\*\*Last updated: April 2, 2026\*\*
+
+
+
+\## 1. Acceptance of Terms
+
+
+
+By downloading, installing, or using TurnAFile ("the Software"), you agree to be bound by these Terms of Use. If you do not agree, do not install or use the Software.
+
+
+
+\## 2. License Types
+
+
+
+\### Free License
+
+\- Allows conversion of up to 10 files per batch
+
+\- Displays a friendly reminder after 30 days of use
+
+\- No expiration date
+
+\- No functional limitations other than the batch size
+
+
+
+\### Paid License ($7.99 USD)
+
+\- Removes the 10-file batch limit
+
+\- Removes the daily reminder
+
+\- One-time payment, lifetime license
+
+\- Valid for personal use on up to 5 computers owned by the licensee
+
+
+
+\## 3. License Activation
+
+
+
+\- Licenses are provided as a `.key` file sent to your email after purchase
+
+\- You may activate the license by loading the `.key` file into the Software
+
+\- Licenses are non-transferable
+
+\- License keys may be revoked if found to be publicly shared or used in violation of these terms
+
+
+
+\## 4. Prohibited Uses
+
+
+
+You may not:
+
+\- Share your license key or `.key` file with others
+
+\- Publish license keys on public websites, forums, or social media
+
+\- Sell or redistribute the Software without permission
+
+\- Reverse engineer, decompile, or modify the Software
+
+\- Use the Software for illegal purposes
+
+
+
+\## 5. Blocked Licenses
+
+
+
+TurnAFile maintains a list of revoked license keys. This list is updated automatically through the Software. If your license key is added to this list, the Software will revert to Free mode.
+
+
+
+\## 6. Privacy
+
+
+
+TurnAFile does not collect any personal information. The Software only:
+
+\- Stores settings locally on your computer
+
+\- Periodically checks for updated blocked license lists (anonymously)
+
+\- Periodically checks for new versions (anonymously)
+
+
+
+No personal data is transmitted to any server.
+
+
+
+\## 7. Disclaimer of Warranty
+
+
+
+The Software is provided "as is" without warranty of any kind. The author is not responsible for any data loss or damage resulting from the use of the Software.
+
+
+
+\## 8. Limitation of Liability
+
+
+
+In no event shall the author be liable for any damages arising out of the use or inability to use the Software.
+
+
+
+\## 9. Changes to Terms
+
+
+
+TurnAFile reserves the right to update these Terms at any time. Continued use of the Software after changes constitutes acceptance of the new Terms.
+
+
+
+\## 10. Contact
+
+
+
+For questions or support: support@turnafile.com
+
+
+
+\---
+
+
+
+\*\*By using TurnAFile, you acknowledge that you have read and agree to these Terms of Use.\*\*
+

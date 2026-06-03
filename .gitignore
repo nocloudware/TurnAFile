@@ -1,0 +1,17 @@
+bin/
+obj/
+.vs/
+*.user
+.DS_Store
+Thumbs.db
+publish/
+TurnAFile.Windows/tools/**/*.exe
+TurnAFile.Windows/tools/**/*.traineddata
+TurnAFile.Windows/tools/FFmpeg/ffmpeg.exe
+*.log
+agent_actions.log
+.env
+*.csx
+.opencode/
+/test_conversion.csx
+

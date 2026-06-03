@@ -1,0 +1,373 @@
+<Window x:Class="TurnAFile.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:controls="clr-namespace:TurnAFile.Windows.Controls"
+        xmlns:resx="clr-namespace:TurnAFile.Windows.Resources"
+        Title="{Binding Source={x:Static resx:StringsWrapper.Instance}, Path=AppTitle}"
+        Height="720" Width="800"
+        MinHeight="640" MinWidth="720"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}"
+        FontFamily="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}">
+
+    <Window.Resources>
+        <resx:StringsWrapper x:Key="Strings" />
+        <BitmapImage x:Key="VideoIcon"   UriSource="/Assets/Emojis/video.png" />
+        <BitmapImage x:Key="AudioIcon"   UriSource="/Assets/Emojis/audio.png" />
+        <BitmapImage x:Key="ImageIcon"   UriSource="/Assets/Emojis/image.png" />
+        <BitmapImage x:Key="DocumentEmojiIcon" UriSource="/Assets/Emojis/file.png" />
+        <BitmapImage x:Key="DataEmojiIcon" UriSource="/Assets/Emojis/chart.png" />
+        <BitmapImage x:Key="FlagUk" UriSource="/Assets/Emojis/flag-uk.png" />
+        <BitmapImage x:Key="FlagEs" UriSource="/Assets/Emojis/flag-es.png" />
+        <BitmapImage x:Key="FlagFr" UriSource="/Assets/Emojis/flag-fr.png" />
+        <BitmapImage x:Key="FlagDe" UriSource="/Assets/Emojis/flag-de.png" />
+        <BitmapImage x:Key="FlagCn" UriSource="/Assets/Emojis/flag-cn.png" />
+        <BitmapImage x:Key="FlagJp" UriSource="/Assets/Emojis/flag-jp.png" />
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Image Source="{StaticResource VideoIcon}" Width="20" Height="20" Margin="0,0,7,0"/>
+                <TextBlock Text="TurnAFile"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"/>
+            </StackPanel>
+
+            <TextBlock Grid.Column="1"
+                       Text="{Binding Source={StaticResource Strings}, Path=AppSubtitle}"
+                       FontSize="11"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <!-- Language Selector -->
+                <ComboBox x:Name="LanguageSelector"
+                          MinWidth="130"
+                          Margin="0,0,8,0"
+                          Style="{StaticResource ThemedComboBoxStyle}"
+                          VerticalContentAlignment="Center"
+                          SelectionChanged="OnLanguageSelectionChanged"
+                          ToolTip="{Binding Source={StaticResource Strings}, Path=SettingsLanguage}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Flag}" Width="20" Height="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <!-- Theme Toggle Button -->
+                <ui:Button Width="36" Height="36"
+                        Click="OnThemeToggleClick"
+                        Appearance="Transparent"
+                        ToolTip="{Binding Source={StaticResource Strings}, Path=ThemeToggleTooltip}">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon x:Name="ThemeIcon" Symbol="WeatherMoon20"/>
+                    </ui:Button.Icon>
+                </ui:Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- Panel inferior: dos columnas -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Columna izquierda: Lista de archivos + selector de carpeta -->
+            <Border Grid.Column="0"
+                    Style="{StaticResource CardStyle}"
+                    Padding="10"
+                    Margin="0,0,8,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <ui:SymbolIcon Symbol="Document24" Margin="0,0,6,0"/>
+                        <TextBlock Text="{Binding Source={StaticResource Strings}, Path=SelectedFilesTitle}"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock x:Name="FileCountText"
+                                   Margin="8,0,0,0"
+                                   Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+
+                     <!-- ListBox que también funciona como Drop Area -->
+                     <ListBox x:Name="FileListBox"
+                              Grid.Row="1"
+                              Background="Transparent"
+                              BorderThickness="0"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              ContextMenuOpening="OnFileListContextMenuOpening"
+                              AllowDrop="True"
+                              DragEnter="OnDragEnter"
+                              Drop="OnDrop"
+                              MinHeight="150">
+                         <ListBox.ItemTemplate>
+                             <DataTemplate>
+                                 <StackPanel Orientation="Horizontal" Margin="0,3">
+                                     <Image Source="{Binding IconImage}" Width="13" Height="13" Margin="0,0,6,0"/>
+                                     <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                     <TextBlock Text="{Binding StatusIcon}"
+                                                Foreground="{Binding StatusColor}"
+                                                FontWeight="Bold"
+                                                Margin="6,0,0,0"
+                                                Visibility="{Binding StatusVisible}"/>
+                                 </StackPanel>
+                             </DataTemplate>
+                         </ListBox.ItemTemplate>
+                     </ListBox>
+
+                    <!-- Mensaje cuando no hay archivos -->
+                    <TextBlock x:Name="EmptyListText"
+                               Grid.Row="1"
+                               Text="{Binding Source={StaticResource Strings}, Path=DragFilesMessage}"
+                               Foreground="{DynamicResource TextSecondaryBrush}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"/>
+
+                    <!-- Botón Seleccionar archivos -->
+                    <ui:Button x:Name="SelectFilesButton"
+                            Grid.Row="2"
+                            Click="OnSelectFiles"
+                            Appearance="Secondary"
+                            Margin="0,12,0,8"
+                            HorizontalAlignment="Center"
+                            Content="{Binding Source={StaticResource Strings}, Path=SelectFilesButton}">
+                        <ui:Button.Icon>
+                            <ui:SymbolIcon Symbol="DocumentAdd24"/>
+                        </ui:Button.Icon>
+                    </ui:Button>
+
+                    <!-- Selector de carpeta de salida -->
+                    <Border Grid.Row="3"
+                            Background="{DynamicResource SurfaceAltBrush}"
+                            CornerRadius="6"
+                            Padding="8,6"
+                            Margin="0,4,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ui:SymbolIcon Grid.Column="0"
+                                   Symbol="Folder24"
+                                   Margin="0,0,8,0"
+                                   VerticalAlignment="Center"/>
+
+                            <TextBlock x:Name="OutputFolderText"
+                                       Grid.Column="1"
+                                       Text="{Binding Source={StaticResource Strings}, Path=OutputFolderDefault}"
+                                       Foreground="{DynamicResource TextSecondaryBrush}"
+                                       VerticalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis"/>
+
+                            <ui:Button x:Name="SelectOutputFolderButton"
+                                    Grid.Column="2"
+                                    Click="OnSelectOutputFolder"
+                                    Appearance="Transparent"
+                                    Padding="6,2"
+                                    Margin="8,0,0,0"
+                                    Content="{Binding Source={StaticResource Strings}, Path=ChangeButton}"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Columna derecha: Formatos y calidad -->
+            <Border Grid.Column="1"
+                    Style="{StaticResource CardStyle}"
+                    Padding="12"
+                    Margin="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" MinWidth="80"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header row -->
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               Text="{Binding Source={StaticResource Strings}, Path=FormatHeader}"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextPrimaryBrush}"
+                               VerticalAlignment="Center"
+                               Margin="0,0,0,10"/>
+
+                    <Grid Grid.Row="0" Grid.Column="2" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Source={StaticResource Strings}, Path=QualityHigh}"  TextAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Source={StaticResource Strings}, Path=QualityMedium}" TextAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Source={StaticResource Strings}, Path=QualityLow}"  TextAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </Grid>
+
+                    <!-- Video -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                        <Image Source="{StaticResource VideoIcon}" Width="14" Height="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Source={StaticResource Strings}, Path=VideoLabel}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <ComboBox x:Name="cmbVideoFormat"
+                              Grid.Row="1" Grid.Column="1"
+                              Style="{StaticResource ThemedComboBoxStyle}"
+                              ItemsSource="{Binding VideoFormats}"
+                              SelectedItem="{Binding SelectedVideoFormat, Mode=TwoWay}"
+                              SelectionChanged="OnVideoFormatChanged"
+                              Margin="0,0,4,10"/>
+
+                    <controls:ThreeStateToggle x:Name="VideoQualityToggle"
+                                                Grid.Row="1" Grid.Column="2"
+                                                Margin="0,0,0,10"
+                                                StateChanged="OnVideoQualityChanged"/>
+
+                    <!-- Audio -->
+                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                        <Image Source="{StaticResource AudioIcon}" Width="14" Height="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Source={StaticResource Strings}, Path=AudioLabel}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <ComboBox x:Name="cmbAudioFormat"
+                              Grid.Row="2" Grid.Column="1"
+                              Style="{StaticResource ThemedComboBoxStyle}"
+                              ItemsSource="{Binding AudioFormats}"
+                              SelectedItem="{Binding SelectedAudioFormat, Mode=TwoWay}"
+                              SelectionChanged="OnAudioFormatChanged"
+                              Margin="0,0,4,10"/>
+
+                    <controls:ThreeStateToggle x:Name="AudioQualityToggle"
+                                                Grid.Row="2" Grid.Column="2"
+                                                Margin="0,0,0,10"
+                                                StateChanged="OnAudioQualityChanged"/>
+
+                    <!-- Image -->
+                    <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                        <Image Source="{StaticResource ImageIcon}" Width="14" Height="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Source={StaticResource Strings}, Path=ImageLabel}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <ComboBox x:Name="cmbImageFormat"
+                              Grid.Row="3" Grid.Column="1"
+                              Style="{StaticResource ThemedComboBoxStyle}"
+                              ItemsSource="{Binding ImageFormats}"
+                              SelectedItem="{Binding SelectedImageFormat, Mode=TwoWay}"
+                              SelectionChanged="OnImageFormatChanged"
+                              Margin="0,0,4,10"/>
+
+                    <controls:ThreeStateToggle x:Name="ImageQualityToggle"
+                                                Grid.Row="3" Grid.Column="2"
+                                                Margin="0,0,0,10"
+                                                StateChanged="OnImageQualityChanged"/>
+
+                    <!-- Document -->
+                    <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                        <Image Source="{StaticResource DocumentEmojiIcon}" Width="14" Height="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Source={StaticResource Strings}, Path=DocumentLabel}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <ComboBox x:Name="cmbDocumentFormat"
+                              Grid.Row="4" Grid.Column="1"
+                              Style="{StaticResource ThemedComboBoxStyle}"
+                              ItemsSource="{Binding DocumentFormats}"
+                              SelectedItem="{Binding SelectedDocumentFormat, Mode=TwoWay}"
+                              SelectionChanged="OnDocumentFormatChanged"
+                              Margin="0,0,4,10"/>
+
+                    <!-- Data -->
+                    <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="{StaticResource DataEmojiIcon}" Width="14" Height="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Source={StaticResource Strings}, Path=DataLabel}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <ComboBox x:Name="cmbDataFormat"
+                              Grid.Row="5" Grid.Column="1"
+                              Style="{StaticResource ThemedComboBoxStyle}"
+                              ItemsSource="{Binding DataFileFormats}"
+                              SelectedItem="{Binding SelectedDataFormat, Mode=TwoWay}"
+                              SelectionChanged="OnDataFormatChanged"
+                              Margin="0,0,4,0"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Barra inferior -->
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ui:Button x:Name="AboutButton"
+                    Click="OnAboutClick"
+                    Appearance="Transparent"
+                    Padding="6,4"
+                    HorizontalAlignment="Left"
+                    Content="{Binding Source={StaticResource Strings}, Path=AboutButton}">
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="Info20"/>
+                </ui:Button.Icon>
+            </ui:Button>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <ui:Button x:Name="ConvertButton"
+                        Click="OnConvertClick"
+                        Appearance="Primary"
+                        Margin="0,0,6,0"
+                        Content="{Binding Source={StaticResource Strings}, Path=ConvertButton}">
+                        <ui:Button.Icon>
+                            <ui:SymbolIcon Symbol="ArrowSyncCircle20"/>
+                        </ui:Button.Icon>
+                    </ui:Button>
+                <ui:Button x:Name="ExitButton"
+                        Click="OnExitClick"
+                        Appearance="Secondary"
+                        Content="{Binding Source={StaticResource Strings}, Path=ExitButton}">
+                        <ui:Button.Icon>
+                            <ui:SymbolIcon Symbol="ArrowExit20"/>
+                        </ui:Button.Icon>
+                    </ui:Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

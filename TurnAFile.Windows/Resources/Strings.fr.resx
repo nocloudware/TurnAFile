@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- MainWindow - Header -->
+  <data name="AppTitle" xml:space="preserve">
+    <value>TurnAFile</value>
+  </data>
+  <data name="AppSubtitle" xml:space="preserve">
+    <value>Conversion multimédia simple et locale</value>
+  </data>
+  <data name="ThemeToggleTooltip" xml:space="preserve">
+    <value>Basculer thème clair/sombre</value>
+  </data>
+
+  <!-- MainWindow - File List -->
+  <data name="SelectedFilesTitle" xml:space="preserve">
+    <value>Fichiers sélectionnés</value>
+  </data>
+  <data name="DragFilesMessage" xml:space="preserve">
+    <value>Glissez des fichiers ici</value>
+  </data>
+  <data name="SelectFilesButton" xml:space="preserve">
+    <value>Sélectionner des fichiers</value>
+  </data>
+  <data name="OutputFolderDefault" xml:space="preserve">
+    <value>(même emplacement que l'original)</value>
+  </data>
+  <data name="SelectOutputFolderTitle" xml:space="preserve">
+    <value>Sélectionner le dossier de sortie</value>
+  </data>
+  <data name="ChangeButton" xml:space="preserve">
+    <value>Changer</value>
+  </data>
+
+  <!-- MainWindow - Formats Panel -->
+  <data name="FormatHeader" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="QualityHigh" xml:space="preserve">
+    <value>Élevée</value>
+  </data>
+  <data name="QualityMedium" xml:space="preserve">
+    <value>Moyenne</value>
+  </data>
+  <data name="QualityLow" xml:space="preserve">
+    <value>Basse</value>
+  </data>
+  
+  <data name="VideoLabel" xml:space="preserve">
+    <value>Vidéo</value>
+  </data>
+  <data name="AudioLabel" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="ImageLabel" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="DocumentLabel" xml:space="preserve">
+    <value>Doc</value>
+  </data>
+  <data name="DataLabel" xml:space="preserve">
+    <value>Données</value>
+  </data>
+
+  <!-- MainWindow - Bottom Bar -->
+  <data name="AboutButton" xml:space="preserve">
+    <value>À propos</value>
+  </data>
+  <data name="ConvertButton" xml:space="preserve">
+    <value>Convertir</value>
+  </data>
+  <data name="BuyButton" xml:space="preserve">
+    <value>Acheter</value>
+  </data>
+
+  <!-- MainWindow - Context Menu -->
+  <data name="ContextMenuConvertTo" xml:space="preserve">
+    <value>Convertir en</value>
+  </data>
+  <data name="ContextMenuQuality" xml:space="preserve">
+    <value>Qualité</value>
+  </data>
+  <data name="ContextMenuQualityHigh" xml:space="preserve">
+    <value>Haute qualité</value>
+  </data>
+  <data name="ContextMenuQualityMedium" xml:space="preserve">
+    <value>Qualité moyenne</value>
+  </data>
+  <data name="ContextMenuQualityLow" xml:space="preserve">
+    <value>Basse qualité</value>
+  </data>
+  <data name="ContextMenuExtractOCR" xml:space="preserve">
+    <value>Extraire le texte (OCR)</value>
+  </data>
+  <data name="ContextMenuSaveAsTXT" xml:space="preserve">
+    <value>Enregistrer en TXT</value>
+  </data>
+  <data name="ContextMenuSaveAsDOCX" xml:space="preserve">
+    <value>Enregistrer en DOCX</value>
+  </data>
+  <data name="ContextMenuSaveAsXLSX" xml:space="preserve">
+    <value>Enregistrer en XLSX</value>
+  </data>
+  <data name="ContextMenuRemove" xml:space="preserve">
+    <value>Retirer de la liste</value>
+  </data>
+  <data name="ContextMenuClearAll" xml:space="preserve">
+    <value>Tout effacer</value>
+  </data>
+
+  <!-- Shell Menu Installer -->
+  <data name="ShellMenuAppName" xml:space="preserve">
+    <value>TurnAFile</value>
+  </data>
+  <data name="ShellMenuAddEntry" xml:space="preserve">
+    <value>Ajouter à TurnAFile</value>
+  </data>
+  <data name="ShellMenuConvertWith" xml:space="preserve">
+    <value>Convertir avec TurnAFile</value>
+  </data>
+  <data name="ShellMenuConvertTo" xml:space="preserve">
+    <value>Convertir en {0}</value>
+  </data>
+  <data name="ShellMenuSaveAsPDF" xml:space="preserve">
+    <value>Enregistrer en PDF</value>
+  </data>
+  <data name="ShellMenuConvertToPDF" xml:space="preserve">
+    <value>Convertir en PDF</value>
+  </data>
+  <data name="ShellMenuQualityHigh" xml:space="preserve">
+    <value>Haute qualité</value>
+  </data>
+  <data name="ShellMenuQualityMedium" xml:space="preserve">
+    <value>Qualité moyenne</value>
+  </data>
+  <data name="ShellMenuQualityLow" xml:space="preserve">
+    <value>Basse qualité</value>
+  </data>
+  <data name="ShellMenuExtractOCR" xml:space="preserve">
+    <value>Extraire le texte (OCR)</value>
+  </data>
+  <data name="ShellMenuSaveAsTXT" xml:space="preserve">
+    <value>Enregistrer en TXT</value>
+  </data>
+  <data name="ShellMenuSaveAsDOCX" xml:space="preserve">
+    <value>Enregistrer en DOCX</value>
+  </data>
+  <data name="ShellMenuSaveAsXLSX" xml:space="preserve">
+    <value>Enregistrer en XLSX</value>
+  </data>
+
+  <!-- Conversion Messages -->
+  <data name="ConversionInProgress" xml:space="preserve">
+    <value>Une conversion est déjà en cours. Veuillez patienter.</value>
+  </data>
+  <data name="SelectFilesMessage" xml:space="preserve">
+    <value>Sélectionnez au moins un fichier à convertir.</value>
+  </data>
+  <data name="NoFilesSelected" xml:space="preserve">
+    <value>Aucun fichier sélectionné</value>
+  </data>
+  <data name="FFmpegNotFound" xml:space="preserve">
+    <value>FFmpeg introuvable</value>
+  </data>
+  <data name="FileTypeNotSupported" xml:space="preserve">
+    <value>Type de fichier non pris en charge : {0}</value>
+  </data>
+  <data name="ErrorConvertingFile" xml:space="preserve">
+    <value>Erreur lors de la conversion de {0}</value>
+  </data>
+  <data name="ConversionCancelled" xml:space="preserve">
+    <value>Conversion annulée</value>
+  </data>
+  <data name="ConversionCompleted" xml:space="preserve">
+    <value>Conversion terminée</value>
+  </data>
+  <data name="ConversionError" xml:space="preserve">
+    <value>Erreur de conversion</value>
+  </data>
+
+  <!-- Batch Conversion -->
+  <data name="FreeVersionBatchLimit" xml:space="preserve">
+    <value>Vous avez {0} fichiers.
+
+La version gratuite traite jusqu'à {1} par lot.
+
+{2} fichiers seront traités. Les {3} restants ne seront PAS convertis.
+
+Voulez-vous continuer ?</value>
+  </data>
+  <data name="FreeVersionLimitTitle" xml:space="preserve">
+    <value>Limite de la version gratuite</value>
+  </data>
+
+  <!-- About Window -->
+  <data name="AboutTitle" xml:space="preserve">
+    <value>À propos de TurnAFile</value>
+  </data>
+  <data name="AboutVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="AboutActivateLicense" xml:space="preserve">
+    <value>Activer la licence</value>
+  </data>
+
+  <!-- License Activation Window -->
+  <data name="LicenseActivationTitle" xml:space="preserve">
+    <value>Activer la licence TurnAFile</value>
+  </data>
+  <data name="LicenseEmail" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="LicenseFile" xml:space="preserve">
+    <value>Fichier de licence</value>
+  </data>
+  <data name="LicenseSelectFile" xml:space="preserve">
+    <value>Sélectionner le fichier de licence</value>
+  </data>
+  <data name="LicenseActivate" xml:space="preserve">
+    <value>Activer</value>
+  </data>
+  <data name="LicenseFullName" xml:space="preserve">
+    <value>Nom complet</value>
+  </data>
+  <data name="LicenseEmailLabel" xml:space="preserve">
+    <value>Adresse e-mail</value>
+  </data>
+  <data name="LicenseKeyLabel" xml:space="preserve">
+    <value>Clé de licence</value>
+  </data>
+  <data name="LicenseOption1" xml:space="preserve">
+    <value>Option 1 : Charger le fichier de licence</value>
+  </data>
+  <data name="LicenseOption2" xml:space="preserve">
+    <value>Option 2 : Saisir manuellement</value>
+  </data>
+  <data name="LicenseLoadFile" xml:space="preserve">
+    <value>📁 Charger le fichier .key</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="AboutBuyLicense" xml:space="preserve">
+    <value>Acheter</value>
+  </data>
+  <data name="ExitButton" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+
+  <!-- Reminder Dialog -->
+  <data name="ReminderTitle" xml:space="preserve">
+    <value>Activez votre licence</value>
+  </data>
+  <data name="ReminderMessage" xml:space="preserve">
+    <value>Votre période d'essai a expiré. Activez votre licence pour continuer à utiliser toutes les fonctionnalités.</value>
+  </data>
+  <data name="ReminderActivate" xml:space="preserve">
+    <value>Activer</value>
+  </data>
+  <data name="ReminderLater" xml:space="preserve">
+    <value>Plus tard</value>
+  </data>
+
+  <!-- Conversion Progress Window -->
+  <data name="ConversionProgress_Title" xml:space="preserve">
+    <value>Conversion de fichiers en cours...</value>
+  </data>
+  <data name="Conversion_progressLabel" xml:space="preserve">
+    <value>Progression</value>
+  </data>
+  <data name="Conversion_cancelButton" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+
+  <!-- Settings/Language -->
+  <data name="SettingsLanguage" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="LanguageSpanish" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="LanguageFrench" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="LanguageGerman" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="LanguageChinese" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="LanguageJapanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+
+  <!-- License Status -->
+  <data name="LicenseStatusLicensed" xml:space="preserve">
+    <value>Statut: Sous licence</value>
+  </data>
+  <data name="LicenseStatusFree" xml:space="preserve">
+    <value>Statut: Gratuit</value>
+  </data>
+  <data name="LicenseNoFileLimit" xml:space="preserve">
+    <value>Limite: Pas de limite de fichiers</value>
+  </data>
+  <data name="LicensedTo" xml:space="preserve">
+    <value>Sous licence à: {0}</value>
+  </data>
+  <data name="LicenseBatchLimitWithDays" xml:space="preserve">
+    <value>Limite: 10 fichiers par lot | {0} jours d'essai restants</value>
+  </data>
+  <data name="LicenseBatchLimitFreeMode" xml:space="preserve">
+    <value>Limite: 10 fichiers par lot | Mode gratuit</value>
+  </data>
+
+  <!-- Conversion Progress -->
+  <data name="ProcessingFile" xml:space="preserve">
+    <value>Traitement du fichier {0} sur {1}</value>
+  </data>
+  <data name="TimeRemainingCalculating" xml:space="preserve">
+    <value>Temps restant: calcul en cours...</value>
+  </data>
+  <data name="TimeRemaining" xml:space="preserve">
+    <value>Temps restant: {0}</value>
+  </data>
+  <data name="ConversionCompletedStatus" xml:space="preserve">
+    <value>Conversion terminée!</value>
+  </data>
+  <data name="ConversionErrorStatus" xml:space="preserve">
+    <value>Erreur: {0}</value>
+  </data>
+  <data name="CancellingStatus" xml:space="preserve">
+    <value>Annulation en cours...</value>
+  </data>
+  <data name="ButtonCompleted" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+  <data name="ButtonError" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+
+  <!-- Context Menu -->
+  <data name="ConvertToFormat" xml:space="preserve">
+    <value>Convertir en {0}</value>
+  </data>
+  <data name="QualityAlta" xml:space="preserve">
+    <value>Haute</value>
+  </data>
+  <data name="QualityMedia" xml:space="preserve">
+    <value>Moyenne</value>
+  </data>
+  <data name="QualityBaja" xml:space="preserve">
+    <value>Basse</value>
+  </data>
+
+  <!-- Dialogs -->
+  <data name="SelectOutputFolderDialog" xml:space="preserve">
+    <value>Sélectionner le dossier de sortie</value>
+  </data>
+
+  <!-- Error Messages -->
+  <data name="ErrorOpeningBrowser" xml:space="preserve">
+    <value>Impossible d'ouvrir le navigateur: {0}</value>
+  </data>
+  <data name="InputFileNotFound" xml:space="preserve">
+    <value>Fichier d'entrée introuvable: {0}</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="InvalidLicenseFile" xml:space="preserve">
+    <value>Le fichier de licence n'est pas valide.</value>
+  </data>
+  <data name="ErrorReadingFile" xml:space="preserve">
+    <value>Erreur de lecture du fichier: {0}</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>L'adresse e-mail n'est pas valide.</value>
+  </data>
+  <data name="ErrorReinstallingMenu" xml:space="preserve">
+    <value>Erreur de réinstallation du menu contextuel: {0}</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>Fichier non trouvé: {0}</value>
+  </data>
+  <data name="FFmpegNotFoundMessage" xml:space="preserve">
+    <value>FFmpeg non trouvé. Veuillez réinstaller l'application.</value>
+  </data>
+  <data name="CouldNotOpenLink" xml:space="preserve">
+    <value>Impossible d'ouvrir le lien: {0}</value>
+  </data>
+
+  <!-- More UI Messages -->
+  <data name="LicenseActivated" xml:space="preserve">
+    <value>Licence activée avec succès.\n\nRedémarrez TurnAFile pour appliquer tous les changements.</value>
+  </data>
+  <data name="CouldNotConvertFile" xml:space="preserve">
+    <value>Impossible de convertir le fichier.</value>
+  </data>
+  <data name="ConversionCancelledMsg" xml:space="preserve">
+    <value>Conversion annulée.</value>
+  </data>
+
+  <!-- New conversion error messages -->
+  <data name="LicenseReinstallSuccess" xml:space="preserve">
+    <value>Menu contextuel de TurnAFile réinstallé avec succès.\n\nLes changements seront visibles après le redémarrage de l'Explorateur de fichiers.</value>
+  </data>
+  <data name="OCRConversionFailed" xml:space="preserve">
+    <value>Échec de la conversion OCR</value>
+  </data>
+  <data name="PandocNotFoundMessage" xml:space="preserve">
+    <value>Pandoc introuvable à : {0}</value>
+  </data>
+  <data name="DocumentConversionFailed" xml:space="preserve">
+    <value>Échec de la conversion de document</value>
+  </data>
+  <data name="UnsupportedDataConversion" xml:space="preserve">
+    <value>Conversion de données non prise en charge : {0} vers {1}</value>
+  </data>
+  <data name="DataConversionFailed" xml:space="preserve">
+    <value>Échec de la conversion de données</value>
+  </data>
+  <data name="CouldNotGeneratePDF" xml:space="preserve">
+    <value>Impossible de générer le PDF à partir de l'image</value>
+  </data>
+  <data name="ErrorGeneratingPDF" xml:space="preserve">
+    <value>Erreur lors de la génération du PDF</value>
+  </data>
+  <data name="PDFGeneratedError" xml:space="preserve">
+    <value>Erreur de génération de PDF</value>
+  </data>
+  <data name="ConversionCancelledStatus" xml:space="preserve">
+    <value>Conversion annulée.</value>
+  </data>
+  <data name="GeneralError" xml:space="preserve">
+    <value>Erreur générale</value>
+  </data>
+
+  <!-- External Licenses Window -->
+  <data name="ExternalLicensesTitle" xml:space="preserve">
+    <value>Licences externes</value>
+  </data>
+  <data name="ExternalLicensesHeader" xml:space="preserve">
+    <value>Licences des composants tiers</value>
+  </data>
+  <data name="ExternalLicensesDescription" xml:space="preserve">
+    <value>Sélectionnez un composant pour afficher sa licence.</value>
+  </data>
+  <data name="SelectComponent" xml:space="preserve">
+    <value>Composant :</value>
+  </data>
+  <data name="OpenFolderButton" xml:space="preserve">
+    <value>Ouvrir le dossier</value>
+  </data>
+  <data name="NoExternalLicensesFound" xml:space="preserve">
+    <value>Aucun fichier de licence externe trouvé.</value>
+  </data>
+  <data name="NoComponentSelected" xml:space="preserve">
+    <value>Veuillez sélectionner un composant d'abord.</value>
+  </data>
+  <data name="ViewExternalLicensesButton" xml:space="preserve">
+    <value>Voir les licences externes</value>
+  </data>
+
+  <!-- About Window Credits -->
+  <data name="AboutCredits" xml:space="preserve">
+    <value>Crédits</value>
+  </data>
+  <data name="AboutDevelopedBy" xml:space="preserve">
+    <value>Développé par</value>
+  </data>
+  <data name="AboutFormatIcons" xml:space="preserve">
+    <value>Icônes de format et qualité</value>
+  </data>
+  <data name="AboutIconsDash" xml:space="preserve">
+    <value> — </value>
+  </data>
+  <data name="AboutFFmpegDesc" xml:space="preserve">
+    <value>Conversion multimédia</value>
+  </data>
+  <data name="AboutClosedXML" xml:space="preserve">
+    <value>ClosedXML</value>
+  </data>
+  <data name="AboutClosedXMLDesc" xml:space="preserve">
+    <value>Traitement des fichiers Excel</value>
+  </data>
+  <data name="AboutPDFsharp" xml:space="preserve">
+    <value>PDFsharp</value>
+  </data>
+  <data name="AboutPDFsharpDesc" xml:space="preserve">
+    <value>Generation de documents PDF</value>
+  </data>
+  <data name="AboutOpenXML" xml:space="preserve">
+    <value>Open XML SDK</value>
+  </data>
+  <data name="AboutOpenXMLDesc" xml:space="preserve">
+    <value>Conversion de formats de documents</value>
+  </data>
+  <data name="AboutSpecialThanks" xml:space="preserve">
+    <value>Remerciements spéciaux</value>
+  </data>
+  <data name="AboutSpecialThanksMessage" xml:space="preserve">
+    <value>Aux communautés FFmpeg, PDFsharp, ClosedXML et Open XML pour leur travail incroyable.</value>
+  </data>
+  <data name="AboutTechnologiesUsed" xml:space="preserve">
+    <value>Technologies utilisées</value>
+  </data>
+  <data name="AboutTechList" xml:space="preserve">
+    <value>.NET 8.0, WPF, FFmpeg, PDFsharp, ClosedXML, Open XML SDK</value>
+  </data>
+  <data name="AboutLicense" xml:space="preserve">
+    <value>Licence</value>
+  </data>
+  <data name="AboutLicenseInfo" xml:space="preserve">
+    <value>Licence MIT - Code source ouvert</value>
+  </data>
+  <data name="AboutViewTerms" xml:space="preserve">
+    <value>Voir les conditions d'utilisation</value>
+  </data>
+</root>

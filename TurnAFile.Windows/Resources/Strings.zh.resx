@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- MainWindow - Header -->
+  <data name="AppTitle" xml:space="preserve">
+    <value>TurnAFile</value>
+  </data>
+  <data name="AppSubtitle" xml:space="preserve">
+    <value>简单本地的媒体转换</value>
+  </data>
+  <data name="ThemeToggleTooltip" xml:space="preserve">
+    <value>切换亮色/暗色主题</value>
+  </data>
+
+  <!-- MainWindow - File List -->
+  <data name="SelectedFilesTitle" xml:space="preserve">
+    <value>已选文件</value>
+  </data>
+  <data name="DragFilesMessage" xml:space="preserve">
+    <value>将文件拖到这里</value>
+  </data>
+  <data name="SelectFilesButton" xml:space="preserve">
+    <value>选择文件</value>
+  </data>
+  <data name="OutputFolderDefault" xml:space="preserve">
+    <value>（与原始文件相同的位置）</value>
+  </data>
+  <data name="SelectOutputFolderTitle" xml:space="preserve">
+    <value>选择输出文件夹</value>
+  </data>
+  <data name="ChangeButton" xml:space="preserve">
+    <value>更改</value>
+  </data>
+
+  <!-- MainWindow - Formats Panel -->
+  <data name="FormatHeader" xml:space="preserve">
+    <value>格式</value>
+  </data>
+  <data name="QualityHigh" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="QualityMedium" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="QualityLow" xml:space="preserve">
+    <value>低</value>
+  </data>
+  
+  <data name="VideoLabel" xml:space="preserve">
+    <value>视频</value>
+  </data>
+  <data name="AudioLabel" xml:space="preserve">
+    <value>音频</value>
+  </data>
+  <data name="ImageLabel" xml:space="preserve">
+    <value>图片</value>
+  </data>
+  <data name="DocumentLabel" xml:space="preserve">
+    <value>文档</value>
+  </data>
+  <data name="DataLabel" xml:space="preserve">
+    <value>数据</value>
+  </data>
+
+  <!-- MainWindow - Bottom Bar -->
+  <data name="AboutButton" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="ConvertButton" xml:space="preserve">
+    <value>转换</value>
+  </data>
+  <data name="BuyButton" xml:space="preserve">
+    <value>购买</value>
+  </data>
+
+  <!-- MainWindow - Context Menu -->
+  <data name="ContextMenuConvertTo" xml:space="preserve">
+    <value>转换为</value>
+  </data>
+  <data name="ContextMenuQuality" xml:space="preserve">
+    <value>质量</value>
+  </data>
+  <data name="ContextMenuQualityHigh" xml:space="preserve">
+    <value>高质量</value>
+  </data>
+  <data name="ContextMenuQualityMedium" xml:space="preserve">
+    <value>中等质量</value>
+  </data>
+  <data name="ContextMenuQualityLow" xml:space="preserve">
+    <value>低质量</value>
+  </data>
+  <data name="ContextMenuExtractOCR" xml:space="preserve">
+    <value>提取文本 (OCR)</value>
+  </data>
+  <data name="ContextMenuSaveAsTXT" xml:space="preserve">
+    <value>保存为 TXT</value>
+  </data>
+  <data name="ContextMenuSaveAsDOCX" xml:space="preserve">
+    <value>保存为 DOCX</value>
+  </data>
+  <data name="ContextMenuSaveAsXLSX" xml:space="preserve">
+    <value>保存为 XLSX</value>
+  </data>
+  <data name="ContextMenuRemove" xml:space="preserve">
+    <value>从列表中移除</value>
+  </data>
+  <data name="ContextMenuClearAll" xml:space="preserve">
+    <value>清除全部</value>
+  </data>
+
+  <!-- Shell Menu Installer -->
+  <data name="ShellMenuAppName" xml:space="preserve">
+    <value>TurnAFile</value>
+  </data>
+  <data name="ShellMenuAddEntry" xml:space="preserve">
+    <value>添加到 TurnAFile</value>
+  </data>
+  <data name="ShellMenuConvertWith" xml:space="preserve">
+    <value>使用 TurnAFile 转换</value>
+  </data>
+  <data name="ShellMenuConvertTo" xml:space="preserve">
+    <value>转换为 {0}</value>
+  </data>
+  <data name="ShellMenuSaveAsPDF" xml:space="preserve">
+    <value>保存为 PDF</value>
+  </data>
+  <data name="ShellMenuConvertToPDF" xml:space="preserve">
+    <value>转换为 PDF</value>
+  </data>
+  <data name="ShellMenuQualityHigh" xml:space="preserve">
+    <value>高质量</value>
+  </data>
+  <data name="ShellMenuQualityMedium" xml:space="preserve">
+    <value>中等质量</value>
+  </data>
+  <data name="ShellMenuQualityLow" xml:space="preserve">
+    <value>低质量</value>
+  </data>
+  <data name="ShellMenuExtractOCR" xml:space="preserve">
+    <value>提取文本 (OCR)</value>
+  </data>
+  <data name="ShellMenuSaveAsTXT" xml:space="preserve">
+    <value>保存为 TXT</value>
+  </data>
+  <data name="ShellMenuSaveAsDOCX" xml:space="preserve">
+    <value>保存为 DOCX</value>
+  </data>
+  <data name="ShellMenuSaveAsXLSX" xml:space="preserve">
+    <value>保存为 XLSX</value>
+  </data>
+
+  <!-- Conversion Messages -->
+  <data name="ConversionInProgress" xml:space="preserve">
+    <value>转换正在进行中，请稍候。</value>
+  </data>
+  <data name="SelectFilesMessage" xml:space="preserve">
+    <value>至少选择一个文件进行转换。</value>
+  </data>
+  <data name="NoFilesSelected" xml:space="preserve">
+    <value>未选择文件</value>
+  </data>
+  <data name="FFmpegNotFound" xml:space="preserve">
+    <value>未找到 FFmpeg</value>
+  </data>
+  <data name="FileTypeNotSupported" xml:space="preserve">
+    <value>不支持的文件类型：{0}</value>
+  </data>
+  <data name="ErrorConvertingFile" xml:space="preserve">
+    <value>转换 {0} 时出错</value>
+  </data>
+  <data name="ConversionCancelled" xml:space="preserve">
+    <value>转换已取消</value>
+  </data>
+  <data name="ConversionCompleted" xml:space="preserve">
+    <value>转换完成</value>
+  </data>
+  <data name="ConversionError" xml:space="preserve">
+    <value>转换错误</value>
+  </data>
+
+  <!-- Batch Conversion -->
+  <data name="FreeVersionBatchLimit" xml:space="preserve">
+    <value>您有 {0} 个文件。
+
+免费版每批处理最多 {1} 个文件。
+
+将处理 {2} 个文件。剩余的 {3} 个文件将不会被转换。
+
+是否继续？</value>
+  </data>
+  <data name="FreeVersionLimitTitle" xml:space="preserve">
+    <value>免费版限制</value>
+  </data>
+
+  <!-- About Window -->
+  <data name="AboutTitle" xml:space="preserve">
+    <value>关于 TurnAFile</value>
+  </data>
+  <data name="AboutVersion" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="AboutActivateLicense" xml:space="preserve">
+    <value>激活许可证</value>
+  </data>
+
+  <!-- License Activation Window -->
+  <data name="LicenseActivationTitle" xml:space="preserve">
+    <value>激活 TurnAFile 许可证</value>
+  </data>
+  <data name="LicenseEmail" xml:space="preserve">
+    <value>电子邮件</value>
+  </data>
+  <data name="LicenseFile" xml:space="preserve">
+    <value>许可证文件</value>
+  </data>
+  <data name="LicenseSelectFile" xml:space="preserve">
+    <value>选择许可证文件</value>
+  </data>
+  <data name="LicenseActivate" xml:space="preserve">
+    <value>激活</value>
+  </data>
+  <data name="LicenseFullName" xml:space="preserve">
+    <value>全名</value>
+  </data>
+  <data name="LicenseEmailLabel" xml:space="preserve">
+    <value>电子邮件地址</value>
+  </data>
+  <data name="LicenseKeyLabel" xml:space="preserve">
+    <value>许可证密钥</value>
+  </data>
+  <data name="LicenseOption1" xml:space="preserve">
+    <value>选项 1：加载许可证文件</value>
+  </data>
+  <data name="LicenseOption2" xml:space="preserve">
+    <value>选项 2：手动输入</value>
+  </data>
+  <data name="LicenseLoadFile" xml:space="preserve">
+    <value>📁 加载 .key 文件</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="AboutBuyLicense" xml:space="preserve">
+    <value>购买</value>
+  </data>
+  <data name="ExitButton" xml:space="preserve">
+    <value>退出</value>
+  </data>
+
+  <!-- Reminder Dialog -->
+  <data name="ReminderTitle" xml:space="preserve">
+    <value>激活您的许可证</value>
+  </data>
+  <data name="ReminderMessage" xml:space="preserve">
+    <value>您的试用期已结束。激活您的许可证以继续使用所有功能。</value>
+  </data>
+  <data name="ReminderActivate" xml:space="preserve">
+    <value>激活</value>
+  </data>
+  <data name="ReminderLater" xml:space="preserve">
+    <value>稍后</value>
+  </data>
+
+  <!-- Conversion Progress Window -->
+  <data name="ConversionProgress_Title" xml:space="preserve">
+    <value>正在转换文件...</value>
+  </data>
+  <data name="Conversion_progressLabel" xml:space="preserve">
+    <value>进度</value>
+  </data>
+  <data name="Conversion_cancelButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+
+  <!-- Settings/Language -->
+  <data name="SettingsLanguage" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="LanguageSpanish" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="LanguageFrench" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="LanguageGerman" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="LanguageChinese" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="LanguageJapanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+
+  <!-- License Status -->
+  <data name="LicenseStatusLicensed" xml:space="preserve">
+    <value>状态：已授权</value>
+  </data>
+  <data name="LicenseStatusFree" xml:space="preserve">
+    <value>状态：免费版</value>
+  </data>
+  <data name="LicenseNoFileLimit" xml:space="preserve">
+    <value>限制：无文件限制</value>
+  </data>
+  <data name="LicensedTo" xml:space="preserve">
+    <value>授权给：{0}</value>
+  </data>
+  <data name="LicenseBatchLimitWithDays" xml:space="preserve">
+    <value>限制：每批次10个文件 | 剩余{0}天试用期</value>
+  </data>
+  <data name="LicenseBatchLimitFreeMode" xml:space="preserve">
+    <value>限制：每批次10个文件 | 免费模式</value>
+  </data>
+
+  <!-- Conversion Progress -->
+  <data name="ProcessingFile" xml:space="preserve">
+    <value>正在处理文件 {0}/{1}</value>
+  </data>
+  <data name="TimeRemainingCalculating" xml:space="preserve">
+    <value>剩余时间：计算中...</value>
+  </data>
+  <data name="TimeRemaining" xml:space="preserve">
+    <value>剩余时间：{0}</value>
+  </data>
+  <data name="ConversionCompletedStatus" xml:space="preserve">
+    <value>转换完成！</value>
+  </data>
+  <data name="ConversionErrorStatus" xml:space="preserve">
+    <value>错误：{0}</value>
+  </data>
+  <data name="CancellingStatus" xml:space="preserve">
+    <value>正在取消...</value>
+  </data>
+  <data name="ButtonCompleted" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="ButtonError" xml:space="preserve">
+    <value>错误</value>
+  </data>
+
+  <!-- Context Menu -->
+  <data name="ConvertToFormat" xml:space="preserve">
+    <value>转换为 {0}</value>
+  </data>
+  <data name="QualityAlta" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="QualityMedia" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="QualityBaja" xml:space="preserve">
+    <value>低</value>
+  </data>
+
+  <!-- Dialogs -->
+  <data name="SelectOutputFolderDialog" xml:space="preserve">
+    <value>选择输出文件夹</value>
+  </data>
+
+  <!-- Error Messages -->
+  <data name="ErrorOpeningBrowser" xml:space="preserve">
+    <value>无法打开浏览器: {0}</value>
+  </data>
+  <data name="InputFileNotFound" xml:space="preserve">
+    <value>找不到输入文件: {0}</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="InvalidLicenseFile" xml:space="preserve">
+    <value>许可证文件无效。</value>
+  </data>
+  <data name="ErrorReadingFile" xml:space="preserve">
+    <value>读取文件时出错: {0}</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>电子邮件地址无效。</value>
+  </data>
+  <data name="ErrorReinstallingMenu" xml:space="preserve">
+    <value>重新安装上下文菜单时出错: {0}</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>未找到文件: {0}</value>
+  </data>
+  <data name="FFmpegNotFoundMessage" xml:space="preserve">
+    <value>未找到 FFmpeg。请重新安装应用程序。</value>
+  </data>
+  <data name="CouldNotOpenLink" xml:space="preserve">
+    <value>无法打开链接: {0}</value>
+  </data>
+
+  <!-- More UI Messages -->
+  <data name="LicenseActivated" xml:space="preserve">
+    <value>许可证激活成功。\n\n重启 TurnAFile 以应用所有更改。</value>
+  </data>
+  <data name="CouldNotConvertFile" xml:space="preserve">
+    <value>无法转换文件。</value>
+  </data>
+  <data name="ConversionCancelledMsg" xml:space="preserve">
+    <value>转换已取消。</value>
+  </data>
+
+  <!-- New conversion error messages -->
+  <data name="LicenseReinstallSuccess" xml:space="preserve">
+    <value>TurnAFile 上下文菜单已成功重新安装。\n\n重启文件资源管理器后将看到更改。</value>
+  </data>
+  <data name="OCRConversionFailed" xml:space="preserve">
+    <value>OCR 转换失败</value>
+  </data>
+  <data name="PandocNotFoundMessage" xml:space="preserve">
+    <value>未找到 Pandoc：{0}</value>
+  </data>
+  <data name="DocumentConversionFailed" xml:space="preserve">
+    <value>文档转换失败</value>
+  </data>
+  <data name="UnsupportedDataConversion" xml:space="preserve">
+    <value>不支持的数据转换：{0} 转 {1}</value>
+  </data>
+  <data name="DataConversionFailed" xml:space="preserve">
+    <value>数据转换失败</value>
+  </data>
+  <data name="CouldNotGeneratePDF" xml:space="preserve">
+    <value>无法从图片生成 PDF</value>
+  </data>
+  <data name="ErrorGeneratingPDF" xml:space="preserve">
+    <value>生成 PDF 时出错</value>
+  </data>
+  <data name="PDFGeneratedError" xml:space="preserve">
+    <value>PDF 生成错误</value>
+  </data>
+  <data name="ConversionCancelledStatus" xml:space="preserve">
+    <value>转换已取消。</value>
+  </data>
+  <data name="GeneralError" xml:space="preserve">
+    <value>一般错误</value>
+  </data>
+
+  <!-- External Licenses Window -->
+  <data name="ExternalLicensesTitle" xml:space="preserve">
+    <value>外部许可证</value>
+  </data>
+  <data name="ExternalLicensesHeader" xml:space="preserve">
+    <value>第三方组件许可证</value>
+  </data>
+  <data name="ExternalLicensesDescription" xml:space="preserve">
+    <value>选择一个组件以查看其许可证。</value>
+  </data>
+  <data name="SelectComponent" xml:space="preserve">
+    <value>组件：</value>
+  </data>
+  <data name="OpenFolderButton" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
+  <data name="NoExternalLicensesFound" xml:space="preserve">
+    <value>未找到外部许可证文件。</value>
+  </data>
+  <data name="NoComponentSelected" xml:space="preserve">
+    <value>请先选择一个组件。</value>
+  </data>
+  <data name="ViewExternalLicensesButton" xml:space="preserve">
+    <value>查看外部许可证</value>
+  </data>
+
+  <!-- About Window Credits -->
+  <data name="AboutCredits" xml:space="preserve">
+    <value>致谢</value>
+  </data>
+  <data name="AboutDevelopedBy" xml:space="preserve">
+    <value>开发者</value>
+  </data>
+  <data name="AboutFormatIcons" xml:space="preserve">
+    <value>格式和质量图标</value>
+  </data>
+  <data name="AboutIconsDash" xml:space="preserve">
+    <value> — </value>
+  </data>
+  <data name="AboutFFmpegDesc" xml:space="preserve">
+    <value>媒体转换</value>
+  </data>
+  <data name="AboutClosedXML" xml:space="preserve">
+    <value>ClosedXML</value>
+  </data>
+  <data name="AboutClosedXMLDesc" xml:space="preserve">
+    <value>Excel 文件处理</value>
+  </data>
+  <data name="AboutPDFsharp" xml:space="preserve">
+    <value>PDFsharp</value>
+  </data>
+  <data name="AboutPDFsharpDesc" xml:space="preserve">
+    <value>PDF 文档生成</value>
+  </data>
+  <data name="AboutOpenXML" xml:space="preserve">
+    <value>Open XML SDK</value>
+  </data>
+  <data name="AboutOpenXMLDesc" xml:space="preserve">
+    <value>文档格式转换</value>
+  </data>
+  <data name="AboutSpecialThanks" xml:space="preserve">
+    <value>特别感谢</value>
+  </data>
+  <data name="AboutSpecialThanksMessage" xml:space="preserve">
+    <value>感谢 FFmpeg、PDFsharp、ClosedXML 和 Open XML 社区的出色工作。</value>
+  </data>
+  <data name="AboutTechnologiesUsed" xml:space="preserve">
+    <value>使用的技术</value>
+  </data>
+  <data name="AboutTechList" xml:space="preserve">
+    <value>.NET 8.0, WPF, FFmpeg, PDFsharp, ClosedXML, Open XML SDK</value>
+  </data>
+  <data name="AboutLicense" xml:space="preserve">
+    <value>许可证</value>
+  </data>
+  <data name="AboutLicenseInfo" xml:space="preserve">
+    <value>MIT 许可证 - 开源</value>
+  </data>
+  <data name="AboutViewTerms" xml:space="preserve">
+    <value>查看使用条款</value>
+  </data>
+</root>

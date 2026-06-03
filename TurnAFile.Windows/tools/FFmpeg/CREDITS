@@ -1,0 +1,10 @@
+FFmpeg is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+
+FFmpeg consists of an assembly of libraries, programs, and tools. The exact license for each component is noted in the corresponding source files.
+
+This build includes libraries: avcodec, avformat, avutil, swscale, swresample, avfilter, avdevice.
+External libraries: libx264, libx265, libvpx, libmp3lame, libopus, libvorbis, libtheora, libwebp, libass, libfreetype, libfribidi, libharfbuzz, libsrt, libssh, libzlib, libbz2, liblzma, libiconv, libxml2 and many more.
+
+For copyright, license, and source code information, see https://ffmpeg.org/legal.html
+Source code: https://github.com/FFmpeg/FFmpeg
+Build configuration: https://www.gyan.dev/ffmpeg/builds/

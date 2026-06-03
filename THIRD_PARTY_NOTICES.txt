@@ -1,0 +1,213 @@
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+For TurnAFile
+================================================================================
+
+This document provides a list of third-party software components used in TurnAFile,
+along with their license types and locations where you can find the complete license text.
+
+TurnAFile is licensed under the MIT License and is distributed for free.
+
+================================================================================
+1. FFmpeg
+================================================================================
+Component:    ffmpeg.exe
+License:      GNU Lesser General Public License (LGPL) / GNU General Public License (GPL)
+Copyright:    Copyright (C) the FFmpeg developers
+Website:      https://ffmpeg.org/
+Source:       https://www.gyan.dev/ffmpeg/builds/
+
+License File: Tools\FFmpeg\LICENSE.txt
+
+Note: FFmpeg is distributed as a separate executable. TurnAFile invokes FFmpeg
+as an external process and is not linked against it.
+
+================================================================================
+2. ClosedXML
+================================================================================
+Component:    ClosedXML.dll
+License:      MIT License
+Copyright:    Copyright (c) 2013 ClosedXML
+Website:      https://github.com/ClosedXML/ClosedXML
+Source:       https://www.nuget.org/packages/ClosedXML/
+
+Note: Used for reading/writing Excel (.xlsx) files.
+
+================================================================================
+3. QuestPDF
+================================================================================
+Component:    QuestPDF.dll
+License:      MIT License (Community)
+Copyright:    Copyright (c) QuestPDF contributors
+Website:      https://www.questpdf.com/
+Source:       https://www.nuget.org/packages/QuestPDF/
+
+Note: Used for PDF generation (text, tables, images, formatted documents).
+Community license: free for individuals, non-profits, and businesses under $1M annual revenue.
+
+================================================================================
+4. Open XML SDK (DocumentFormat.OpenXml)
+================================================================================
+Component:    DocumentFormat.OpenXml.dll
+License:      MIT License
+Copyright:    Copyright (c) Microsoft Corporation
+Website:      https://github.com/OfficeDev/Open-XML-SDK
+Source:       https://www.nuget.org/packages/DocumentFormat.OpenXml/
+
+Note: Used for reading/writing Word (.docx) files with full formatting preservation.
+
+================================================================================
+5. PdfPig
+================================================================================
+Component:    UglyToad.PdfPig.dll
+License:      Apache License 2.0
+Copyright:    Copyright (c) PdfPig contributors
+Website:      https://github.com/UglyToad/PdfPig
+Source:       https://www.nuget.org/packages/PdfPig/
+
+Note: Used for extracting text and structure from PDF files.
+
+================================================================================
+6. Tesseract OCR
+================================================================================
+Component:    Tesseract.dll, Tesseract.Drawing.dll, tesseract50.dll, leptonica-1.82.0.dll
+License:      Apache License 2.0
+Copyright:    Copyright (c) Tesseract contributors
+Website:      https://github.com/charlesw/tesseract
+Source:       https://www.nuget.org/packages/Tesseract/
+
+Note: Used for optical character recognition (OCR) of text in images and PDFs.
+
+================================================================================
+7. WPF-UI (Wpf.Ui)
+================================================================================
+Component:    WpfUi.dll
+License:      MIT License
+Copyright:    Copyright (c) WPF-UI contributors
+Website:      https://wpfui.lepo.co/
+Source:       https://www.nuget.org/packages/WPF-UI/
+
+Note: Modern WPF UI controls library used for the application interface.
+
+================================================================================
+8. Microsoft.Win32.SystemEvents
+================================================================================
+Component:    Microsoft.Win32.SystemEvents.dll
+License:      MIT License
+Copyright:    Copyright (c) Microsoft Corporation
+Website:      https://dotnet.microsoft.com/
+
+Note: Used for system theme change detection.
+
+================================================================================
+9. System.Management
+================================================================================
+Component:    System.Management.dll
+License:      MIT License
+Copyright:    Copyright (c) .NET Foundation and Contributors
+Website:      https://dotnet.microsoft.com/
+Source:       https://www.nuget.org/packages/System.Management/
+
+Note: Used for system information queries (GPU detection, etc.).
+
+================================================================================
+10. Tesseract.Drawing
+================================================================================
+Component:    Tesseract.Drawing.dll
+License:      Apache License 2.0
+Copyright:    Copyright (c) Tesseract contributors
+Website:      https://github.com/charlesw/tesseract
+Source:       https://www.nuget.org/packages/Tesseract.Drawing/
+
+Note: Image processing support for Tesseract OCR.
+
+================================================================================
+11. System.IO.Compression
+================================================================================
+Component:    System.IO.Compression.dll
+License:      MIT License
+Copyright:    Copyright (c) .NET Foundation and Contributors
+Website:      https://dotnet.microsoft.com/
+
+Note: Used for ZIP/EPUB archive extraction.
+
+================================================================================
+12. System.Text.Json
+================================================================================
+Component:    System.Text.Json.dll
+License:      MIT License
+Copyright:    Copyright (c) .NET Foundation and Contributors
+Website:      https://dotnet.microsoft.com/
+
+Note: Used for JSON parsing (settings, updates).
+
+================================================================================
+13. System.Net.Http
+================================================================================
+Component:    System.Net.Http.dll
+License:      MIT License
+Copyright:    Copyright (c) .NET Foundation and Contributors
+Website:      https://dotnet.microsoft.com/
+
+Note: Used for HTTP requests (update checking).
+
+================================================================================
+14. CsvHelper (if used by ClosedXML)
+================================================================================
+Component:    Included with ClosedXML
+License:      Dual license: MS-PL / Apache 2.0
+Copyright:    Copyright (c) 2009-2023 Josh Close
+Website:      https://joshclose.github.io/CsvHelper/
+
+Note: CSV parsing support inherited through ClosedXML dependency.
+
+================================================================================
+15. Microsoft.Extensions.Logging.Abstractions
+================================================================================
+Component:    Microsoft.Extensions.Logging.Abstractions.dll
+License:      MIT License
+Copyright:    Copyright (c) .NET Foundation and Contributors
+Website:      https://dotnet.microsoft.com/
+
+Note: Logging abstractions inherited through ClosedXML dependency.
+
+================================================================================
+16. SixLabors.Fonts (if used by QuestPDF)
+================================================================================
+Component:    SixLabors.Fonts.dll
+License:      Apache License 2.0 / SixLabors License
+Copyright:    Copyright (c) Six Labors
+Website:      https://sixlabors.com/
+
+Note: Font handling inherited through QuestPDF dependency.
+
+================================================================================
+17. SkiaSharp (if used by QuestPDF)
+================================================================================
+Component:    SkiaSharp.dll
+License:      MIT License
+Copyright:    Copyright (c) Xamarin Inc / Microsoft
+Website:      https://github.com/mono/SkiaSharp
+Source:       https://www.nuget.org/packages/SkiaSharp/
+
+Note: Graphics rendering inherited through QuestPDF dependency.
+
+================================================================================
+
+PDF FORMATTING PRESERVATION
+---------------------------
+TurnAFile preserves PDF/document formatting through a combination of:
+  - Open XML SDK (MIT) for reading DOCX structure (styles, colors, fonts, tables)
+  - Custom HTML renderer for HTML→PDF rendering
+  - QuestPDF (MIT) for final PDF document assembly
+  - Custom lightweight HTML parser (in-house, MIT-compatible) for HTML→PDF text extraction
+
+================================================================================
+
+VIEWING FULL LICENSE TEXTS
+--------------------------
+Full license texts are available in the installation folder under "Tools" and "Libs"
+subfolders, or via Help > About > View Licenses in the application.
+
+================================================================================
+END OF THIRD-PARTY NOTICES
+================================================================================

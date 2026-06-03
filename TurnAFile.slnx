@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Elementos de la solución/">
+    <File Path=".gitignore" />
+    <File Path="LICENSE.txt" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="TurnAFile.Core/TurnAFile.Core.csproj" />
+  <Project Path="TurnAFile.Windows/TurnAFile.Windows.csproj" />
+</Solution>

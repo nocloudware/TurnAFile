@@ -1,0 +1,7 @@
+{
+  "version": "1.0.0",
+  "releaseDate": "2026-04-02",
+  "downloadUrl": "https://tu-usuario.gumroad.com/l/turnafile",
+  "installerUrl": "https://raw.githubusercontent.com/tu-usuario/TurnAFile/main/distribution/TurnAFile_Setup.exe",
+  "changeLog": "- Primera versión pública"
+}

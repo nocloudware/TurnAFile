@@ -1,0 +1,129 @@
+<ui:FluentWindow x:Class="TurnAFile.Windows.Views.ExternalLicensesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:resx="clr-namespace:TurnAFile.Windows.Resources"
+        Title="{Binding Source={x:Static resx:StringsWrapper.Instance}, Path=ExternalLicensesTitle}"
+        Width="700" Height="550"
+        MinWidth="600" MinHeight="450"
+        WindowStartupLocation="CenterOwner"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        ResizeMode="CanResize"
+        ShowInTaskbar="False"
+        KeyDown="OnKeyDown">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <resx:StringsWrapper x:Key="Strings" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Window.Icon>
+        <BitmapImage UriSource="/Assets/icon-toggles.ico"/>
+    </Window.Icon>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0"
+                   Text="{Binding Source={StaticResource Strings}, Path=ExternalLicensesHeader}"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   Foreground="{DynamicResource TextPrimaryBrush}"
+                   Margin="0,0,0,10"/>
+
+        <TextBlock Grid.Row="1"
+                   Text="{Binding Source={StaticResource Strings}, Path=ExternalLicensesDescription}"
+                   FontSize="12"
+                   Foreground="{DynamicResource TextSecondaryBrush}"
+                   Margin="0,0,0,15"
+                   TextWrapping="Wrap"/>
+
+        <!-- Main Content -->
+        <Border Grid.Row="2"
+                Background="{DynamicResource SurfaceBrush}"
+                CornerRadius="8"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource BorderBrush}"
+                Padding="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Component Selector -->
+                <Grid Grid.Row="0" Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Text="{Binding Source={StaticResource Strings}, Path=SelectComponent}"
+                               FontSize="12"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextPrimaryBrush}"
+                               VerticalAlignment="Center"
+                               Margin="0,0,10,0"/>
+
+                    <ComboBox x:Name="ComponentSelector"
+                              Grid.Column="1"
+                              Style="{StaticResource ThemedComboBoxStyle}"
+                              SelectionChanged="OnComponentSelectionChanged"
+                              VerticalAlignment="Center"/>
+
+                    <ui:Button x:Name="OpenFolderButton"
+                              Grid.Column="2"
+                              Click="OnOpenFolderClick"
+                              Appearance="Secondary"
+                              Padding="12,6"
+                              FontSize="11"
+                              Margin="10,0,0,0"
+                              VerticalAlignment="Center"
+                              Content="{Binding Source={StaticResource Strings}, Path=OpenFolderButton}">
+                        <ui:Button.Icon>
+                            <ui:SymbolIcon Symbol="FolderOpen24"/>
+                        </ui:Button.Icon>
+                    </ui:Button>
+                </Grid>
+
+                <!-- License Text Display -->
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <Border Background="{DynamicResource WindowBackgroundBrush}"
+                            CornerRadius="6"
+                            Padding="16"
+                            BorderThickness="1"
+                            BorderBrush="{DynamicResource BorderBrush}">
+                        <TextBlock x:Name="LicenseTextBlock"
+                                   FontFamily="Consolas"
+                                   FontSize="11"
+                                   Foreground="{DynamicResource TextPrimaryBrush}"
+                                   TextWrapping="Wrap"
+                                   LineHeight="18"
+                                   Margin="0"/>
+                    </Border>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+        <!-- Close Button -->
+        <ui:Button Grid.Row="3"
+                  Content="{Binding Source={x:Static resx:StringsWrapper.Instance}, Path=CloseButton}"
+                  Click="OnCloseClick"
+                  HorizontalAlignment="Right"
+                  Padding="20,8"
+                  FontSize="12"
+                  Margin="0,15,0,0"
+                  Appearance="Secondary"/>
+    </Grid>
+</ui:FluentWindow>
