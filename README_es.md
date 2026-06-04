@@ -70,7 +70,11 @@
 - Ventana de progreso con cancelación
 - Menú contextual de Windows Explorer
 - Temas claro y oscuro
-- Multi-idioma: English, Español, Français, Deutsch, 中文, 日本語, Português
+- **7 idiomas**: English, Español, Français, Deutsch, 中文 (Chino), 日本語 (Japonés), Portugués (Portugués)
+
+### Donar
+- Si TurnAFile te resulta útil, considera [donar](https://www.nocloudware.com/donate.html) para apoyar el desarrollo
+- Donaciones vía PayPal — acepta tarjeta de crédito/débito, no requiere cuenta PayPal
 
 ### Conversión por Lotes
 - Procesar múltiples archivos simultáneamente
@@ -136,6 +140,13 @@
 | **WPF-UI** | Controles UI modernos | MIT |
 
 ---
+
+## 💚 Donar
+
+Si TurnAFile te ayuda, considera [apoyar el proyecto](https://www.nocloudware.com/donate.html):
+
+- **PayPal** — tarjeta de crédito/débito o cuenta PayPal
+- Cada contribución ayuda a mantener la app gratuita y de código abierto
 
 ## 📝 Licencia
 

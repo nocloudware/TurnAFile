@@ -70,7 +70,11 @@
 - Progress in separate window with cancellation
 - Windows Explorer context menu — right-click any supported file to convert directly
 - Light and dark themes
-- Multi-language: English, Español, Français, Deutsch, 中文, 日本語, Português
+- **7 languages**: English, Español, Français, Deutsch, 中文 (Chinese), 日本語 (Japanese), Português (Portuguese)
+
+### Donate
+- If you find TurnAFile useful, consider [donating](https://www.nocloudware.com/donate.html) to support development
+- Donations via PayPal — credit/debit card accepted, no PayPal account required
 
 ### Batch Conversion
 - Process multiple files simultaneously
@@ -136,6 +140,13 @@
 | **WPF-UI** | Modern UI controls library | MIT |
 
 ---
+
+## 💚 Donate
+
+If TurnAFile helps you, consider [supporting the project](https://www.nocloudware.com/donate.html):
+
+- **PayPal** — credit/debit card or PayPal account
+- Every contribution helps keep the app free and open source
 
 ## 📝 License
 
