@@ -93,7 +93,17 @@
 2. Extract the ZIP file to a folder
 3. Run `TurnAFile.exe`
 
-**Requirements:** Windows 10/11 (64-bit), .NET 8.0 Runtime
+## 🚀 Installation
+1. Download the latest version from [Releases](https://github.com/nocloudware/TurnAFile/releases)
+2. Extract the ZIP file to a folder
+3. Run `TurnAFile.exe`
+
+**Tips**
+
+![TurnAFile Light Theme](/Assets/Screenshots/Screenshots/TurnAFile-main-light.png)
+![TurnAFile Dark Theme](/Assets/Screenshots/Screenshots/TurnAFile-main-dark.png)
+
+**Supported File Formats**
 
 ---
 
