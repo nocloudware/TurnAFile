@@ -12,7 +12,7 @@
 #define MyAppExeName "TurnAFile.exe"
 
 ; Ruta de salida del publish (ajustar si es necesario)
-#define PublishDir "publish\TurnAFile"
+#define PublishDir "C:\Users\chand\Desktop\Proyectos\TurnAFile\publish\TurnAFile"
 
 [Setup]
 AppId={{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}
@@ -29,7 +29,7 @@ AllowNoIcons=yes
 
 OutputDir=installer\output
 OutputBaseFilename=TurnAFile-{#MyAppVersion}-Setup
-SetupIconFile=TurnAFile.Windows\Assets\icon-toggles.ico
+SetupIconFile=..\TurnAFile.Windows\Assets\icon-toggles.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 
 Compression=lzma2/ultra64
@@ -69,7 +69,7 @@ Source: "{#PublishDir}\tools\FFmpeg\*"; DestDir: "{app}\tools\FFmpeg"; Flags: ig
 Source: "{#PublishDir}\tools\tessdata\*"; DestDir: "{app}\tools\tessdata"; Flags: ignoreversion
 
 ; Licenses and attributions
-Source: "{#PublishDir}\Licenses\*"; DestDir: "{app}\Licenses"; Flags: ignoreversion recursesubdirs
+Source: "{#PublishDir}\THIRD_PARTY_NOTICES.txt"; DestDir: "{app}\"; Flags: ignoreversion
 
 ; Documentation
 Source: "{#PublishDir}\docs\*"; DestDir: "{app}\docs"; Flags: ignoreversion recursesubdirs
@@ -97,6 +97,8 @@ Type: filesandordirs; Name: "{localappdata}\TurnAFile"
 [Code]
 // Check if .NET 8 Desktop Runtime is installed
 function InitializeSetup(): Boolean;
+var
+  ResultCode: Integer;
 begin
   Result := True;
   if not FileExists(ExpandConstant('{system}\hostfxr.dll')) then
