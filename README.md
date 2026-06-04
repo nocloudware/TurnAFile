@@ -35,7 +35,6 @@
 - **OCR**: Optical Character Recognition to TXT
 
 ### 📄 Document Conversion
-
 | Input | Output Formats |
 |-------|---------------|
 | DOCX | DOCX, PDF, TXT, MD, HTML, EPUB |
@@ -52,7 +51,6 @@
 - EPUB → PDF with book-style rendered content
 
 ### 📊 Data Conversion
-
 | Input | Output Formats |
 |-------|---------------|
 | XLSX | XLSX, CSV, JSON, **PDF** |
@@ -68,7 +66,7 @@
 
 ### Interface
 - Single window with file selector (drag and drop)
-- Side panel for format and quality selection
+- Side window for format and quality selection
 - Progress in separate window with cancellation
 - Windows Explorer context menu — right-click any supported file to convert directly
 - Light and dark themes
@@ -88,22 +86,39 @@
 ---
 
 ## 🚀 Installation
-
 1. Download the latest version from [Releases](https://github.com/nocloudware/TurnAFile/releases)
 2. Extract the ZIP file to a folder
 3. Run `TurnAFile.exe`
 
-## 🚀 Installation
-1. Download the latest version from [Releases](https://github.com/nocloudware/TurnAFile/releases)
-2. Extract the ZIP file to a folder
-3. Run `TurnAFile.exe`
+## 📸 Screenshots
 
-**Tips**
+![Light Theme](Assets/Screenshots/TurnAFile-main-light.png)
+![Dark Theme](Assets/Screenshots/TurnAFile-main-dark.png)
 
-![TurnAFile Light Theme](/Assets/Screenshots/Screenshots/TurnAFile-main-light.png)
-![TurnAFile Dark Theme](/Assets/Screenshots/Screenshots/TurnAFile-main-dark.png)
+## 📄 Supported File Formats
 
-**Supported File Formats**
+| Input | Output Formats |
+|-------|---------------|
+| MP4, AVI, MKV, WEBM, MOV, WMV, FLV | MP4, AVI, MKV, WEBM, MOV, **MP3**, **M4A** |
+| MP3, WAV, M4A, FLAC, OGG, AAC, WMA | MP3, WAV, M4A, FLAC, OGG |
+| JPG, JPEG, PNG, WEBP, GIF, BMP, TIFF | JPG, PNG, WEBP, GIF, BMP, TIFF, **PDF**, **TXT (OCR)** |
+| DOCX | DOCX, PDF, TXT, MD, HTML, EPUB |
+| TXT | TXT, DOCX, HTML, **PDF** |
+| HTML / HTM | HTML, DOCX, TXT, **PDF** |
+| MD / Markdown | MD, DOCX, HTML, TXT |
+| RTF | TXT, DOCX |
+| ODT | TXT |
+| PDF | TXT, DOCX, HTML, EPUB, MD |
+| EPUB | TXT, HTML, EPUB, DOCX, PDF, MD |
+| XLSX | XLSX, CSV, JSON, **PDF** |
+| CSV | CSV, XLSX, JSON, **PDF** |
+| JSON | JSON, CSV, XLSX, **PDF** |
+
+- Preserves formatting in DOCX → PDF (headings, bold, italic, color, font, tables, images)
+- HTML → PDF with syntax highlighting (VS Code style)
+- EPUB → PDF with book-style rendered content
+- PDF tables optimized with font scaling and column wrapping
+- Support for large files with wide columns
 
 ---
 

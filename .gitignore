@@ -15,3 +15,5 @@ agent_actions.log
 .opencode/
 /test_conversion.csx
 
+
+installer/output/
