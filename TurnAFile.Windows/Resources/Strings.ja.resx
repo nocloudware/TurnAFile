@@ -130,6 +130,9 @@
   <data name="BuyButton" xml:space="preserve">
     <value>購入</value>
   </data>
+  <data name="DonateButton" xml:space="preserve">
+    <value>寄付</value>
+  </data>
 
   <!-- MainWindow - Context Menu -->
   <data name="ContextMenuConvertTo" xml:space="preserve">

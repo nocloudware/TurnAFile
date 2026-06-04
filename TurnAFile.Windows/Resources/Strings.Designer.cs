@@ -142,6 +142,15 @@ namespace TurnAFile.Windows.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Donate.
+        /// </summary>
+        public static string DonateButton {
+            get {
+                return ResourceManager.GetString("DonateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Change.
         /// </summary>
         public static string ChangeButton {

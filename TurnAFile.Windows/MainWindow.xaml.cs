@@ -1249,6 +1249,19 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         w.ShowDialog();
     }
 
+    private void OnDonateClick(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://www.nocloudware.com/donate.html",
+                UseShellExecute = true
+            });
+        }
+        catch { }
+    }
+
     private void OnHeaderMouseDown(object sender, MouseButtonEventArgs e)
     {
         if (e.LeftButton == MouseButtonState.Pressed)

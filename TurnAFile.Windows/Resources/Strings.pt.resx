@@ -125,6 +125,9 @@
   <data name="BuyButton" xml:space="preserve">
     <value>Comprar</value>
   </data>
+  <data name="DonateButton" xml:space="preserve">
+    <value>Doar</value>
+  </data>
   <!-- MainWindow - Context Menu -->
   <data name="ContextMenuConvertTo" xml:space="preserve">
     <value>Converter para</value>

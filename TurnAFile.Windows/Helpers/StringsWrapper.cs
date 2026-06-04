@@ -42,6 +42,7 @@ public sealed class StringsWrapper : INotifyPropertyChanged
     public string AboutButton => Strings.AboutButton;
     public string ConvertButton => Strings.ConvertButton;
     public string BuyButton => Strings.BuyButton;
+    public string DonateButton => Strings.DonateButton;
 
     public string ContextMenuConvertTo => Strings.ContextMenuConvertTo;
     public string ContextMenuQuality => Strings.ContextMenuQuality;

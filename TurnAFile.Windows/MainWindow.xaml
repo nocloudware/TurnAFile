@@ -339,6 +339,8 @@
         <!-- Barra inferior -->
         <Grid Grid.Row="2" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
@@ -347,14 +349,25 @@
                     Click="OnAboutClick"
                     Appearance="Transparent"
                     Padding="6,4"
-                    HorizontalAlignment="Left"
                     Content="{Binding Source={StaticResource Strings}, Path=AboutButton}">
                 <ui:Button.Icon>
                     <ui:SymbolIcon Symbol="Info20"/>
                 </ui:Button.Icon>
             </ui:Button>
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <ui:Button x:Name="DonateButton"
+                    Grid.Column="1"
+                    Click="OnDonateClick"
+                    Appearance="Transparent"
+                    Padding="6,4"
+                    MinWidth="80"
+                    Content="{Binding Source={StaticResource Strings}, Path=DonateButton}">
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="Money24" Foreground="#2E7D32"/>
+                </ui:Button.Icon>
+            </ui:Button>
+
+            <StackPanel Grid.Column="3" Orientation="Horizontal">
                 <ui:Button x:Name="ConvertButton"
                         Click="OnConvertClick"
                         Appearance="Primary"
