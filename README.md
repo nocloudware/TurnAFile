@@ -99,6 +99,14 @@
 ![Light Theme](Assets/Screenshots/TurnAFile-main-light.png)
 ![Dark Theme](Assets/Screenshots/TurnAFile-main-dark.png)
 
+### Context Menu
+
+<img src="Assets/Screenshots/context-video.png" width="320" alt="Video Context Menu"/>
+<img src="Assets/Screenshots/context-audio.png" width="320" alt="Audio Context Menu"/>
+<img src="Assets/Screenshots/context-image.png" width="320" alt="Image Context Menu"/>
+<img src="Assets/Screenshots/context-doc.png" width="320" alt="Document Context Menu"/>
+<img src="Assets/Screenshots/context-data.png" width="320" alt="Data Context Menu"/>
+
 ## 📄 Supported File Formats
 
 | Input | Output Formats |
