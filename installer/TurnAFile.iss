@@ -10,7 +10,7 @@
 ; ============================================================
 
 #define MyAppName "TurnAFile"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.1"
 #define MyAppPublisher "TurnAFile"
 #define MyAppURL "https://github.com/nocloudware/TurnAFile"
 #define MyAppExeName "TurnAFile.exe"
