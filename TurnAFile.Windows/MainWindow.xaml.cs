@@ -151,7 +151,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         Video, Audio, Image, Document, Data, Unknown
     }
-
+    
     public MainWindow()
     {
         InitializeComponent();
@@ -168,7 +168,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             _videoIcon = new BitmapImage(new Uri("pack://application:,,,/Assets/Emojis/video.png"));
             _audioIcon = new BitmapImage(new Uri("pack://application:,,,/Assets/Emojis/audio.png"));
-            _imageIcon = new BitmapImage(new Uri("pack://application:,,,/Assets/Emojis/image.png"));
+            _imageIcon = new BitmapImage(new Uri("pack://application:,,,/Assets/Emojis/camera.png"));
             _fileIcon = new BitmapImage(new Uri("pack://application:,,,/Assets/Emojis/file.png"));
             _defaultFileIcon = new BitmapImage(new Uri("pack://application:,,,/Assets/Emojis/file.png"));
         }

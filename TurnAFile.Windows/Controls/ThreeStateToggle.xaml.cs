@@ -28,10 +28,14 @@ public partial class ThreeStateToggle : UserControl
     private double _centerPosition = 0;
     private double _rightPosition = 0;
 
+    private readonly Color _colorHigh = Color.FromRgb(132, 112, 104);
+    private readonly Color _colorMedium = Color.FromRgb(93, 111, 69);
+    private readonly Color _colorLow = Color.FromRgb(83, 108, 122);
+
     private static void OnStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        var control = d as ThreeStateToggle;
-        control?.UpdatePosition((ToggleState)e.NewValue);
+        if (d is ThreeStateToggle control)
+            control.UpdatePosition((ToggleState)e.NewValue);
     }
 
     public ThreeStateToggle()
@@ -57,22 +61,18 @@ public partial class ThreeStateToggle : UserControl
     {
         _trackWidth = ActualWidth;
         if (_trackWidth <= 0) _trackWidth = 120;
-
         _leftPosition = 2;
         _rightPosition = _trackWidth - _thumbWidth - 2;
         _centerPosition = (_trackWidth - _thumbWidth) / 2;
     }
 
-    private double GetPositionForState(ToggleState state)
+    private double GetPositionForState(ToggleState state) => state switch
     {
-        return state switch
-        {
-            ToggleState.High => _leftPosition,
-            ToggleState.Medium => _centerPosition,
-            ToggleState.Low => _rightPosition,
-            _ => _centerPosition
-        };
-    }
+        ToggleState.High => _leftPosition,
+        ToggleState.Medium => _centerPosition,
+        ToggleState.Low => _rightPosition,
+        _ => _centerPosition
+    };
 
     private ToggleState GetStateForPosition(double position)
     {
@@ -80,12 +80,9 @@ public partial class ThreeStateToggle : UserControl
         double distCenter = Math.Abs(position - _centerPosition);
         double distRight = Math.Abs(position - _rightPosition);
 
-        if (distLeft <= distCenter && distLeft <= distRight)
-            return ToggleState.High;
-        else if (distCenter <= distLeft && distCenter <= distRight)
-            return ToggleState.Medium;
-        else
-            return ToggleState.Low;
+        if (distLeft <= distCenter && distLeft <= distRight) return ToggleState.High;
+        if (distCenter <= distLeft && distCenter <= distRight) return ToggleState.Medium;
+        return ToggleState.Low;
     }
 
     private void UpdatePosition(ToggleState state)
@@ -93,33 +90,43 @@ public partial class ThreeStateToggle : UserControl
         if (!IsLoaded) return;
 
         UpdateTrackWidth();
-
         double targetX = GetPositionForState(state);
-
         Canvas.SetLeft(ThumbButton, targetX);
 
-        UpdateTrackColor(state);
-
+        UpdateVisuals(state, targetX);
         StateChanged?.Invoke(this, new RoutedEventArgs());
     }
 
-    private void UpdateTrackColor(ToggleState state)
+    private void UpdateVisuals(ToggleState state, double thumbX)
     {
-        var textBrush = Application.Current.Resources["TextPrimaryBrush"] as SolidColorBrush;
-        if (textBrush != null && textBrush.Color == Colors.White)
+        Color color;
+        double progressWidth;
+
+        switch (state)
         {
-            TrackBorder.Background = state switch
-            {
-                ToggleState.High => new SolidColorBrush(Color.FromRgb(0, 120, 212)),
-                ToggleState.Medium => new SolidColorBrush(Color.FromRgb(107, 142, 35)),
-                ToggleState.Low => new SolidColorBrush(Color.FromRgb(205, 92, 92)),
-                _ => TrackBorder.Background
-            };
+            case ToggleState.High:
+                color = _colorHigh;
+                progressWidth = thumbX + _thumbWidth;
+                break;
+            case ToggleState.Medium:
+                color = _colorMedium;
+                progressWidth = thumbX + _thumbWidth;
+                break;
+            case ToggleState.Low:
+                color = _colorLow;
+                progressWidth = _trackWidth;
+                break;
+            default:
+                color = _colorMedium;
+                progressWidth = thumbX + _thumbWidth;
+                break;
         }
-        else
-        {
-            TrackBorder.Background = Application.Current.Resources["BorderBrush"] as Brush;
-        }
+
+        ProgressFill.Background = new SolidColorBrush(color);
+        ProgressFill.Width = progressWidth;
+
+        if (ThumbButton.Template.FindName("ThumbBorder", ThumbButton) is Border thumbBorder)
+            thumbBorder.Background = new SolidColorBrush(color);
     }
 
     private void OnThumbDragDelta(object sender, DragDeltaEventArgs e)
@@ -128,22 +135,19 @@ public partial class ThreeStateToggle : UserControl
         if (double.IsNaN(currentLeft)) currentLeft = _centerPosition;
 
         double newX = currentLeft + e.HorizontalChange;
-        double maxX = _trackWidth - _thumbWidth - 2;
-        newX = Math.Max(2, Math.Min(newX, maxX));
-
-        Canvas.SetLeft(ThumbButton, newX);
+        newX = Math.Max(_leftPosition, Math.Min(newX, _rightPosition));
 
         var newState = GetStateForPosition(newX);
         if (newState != State)
         {
             State = newState;
         }
+        e.Handled = true;
     }
 
     protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
     {
         base.OnMouseLeftButtonUp(e);
-
         var position = e.GetPosition(this).X;
         double step = (_trackWidth - _thumbWidth) / 2;
 

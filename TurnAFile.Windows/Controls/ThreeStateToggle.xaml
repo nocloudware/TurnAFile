@@ -4,28 +4,35 @@
              Width="150" Height="28"
              Background="Transparent">
     <Grid>
+        <!-- Track background -->
         <Border x:Name="TrackBorder"
                 Background="{DynamicResource BorderBrush}"
                 CornerRadius="14"
                 Height="28"/>
 
-        <Canvas x:Name="ThumbCanvas"
+        <!-- Colored progress fill -->
+        <Border x:Name="ProgressFill"
+                Background="#847068"
+                CornerRadius="14"
                 Height="28"
-                Width="Auto">
+                HorizontalAlignment="Left"
+                Width="28"
+                Opacity="0.9"/>
+
+        <!-- Thumb -->
+        <Canvas x:Name="ThumbCanvas" Height="28" Width="Auto">
             <Thumb x:Name="ThumbButton"
-                   Width="24"
-                   Height="24"
-                   Canvas.Top="2"
-                   Cursor="Hand"
-                   DragDelta="OnThumbDragDelta">
+                   Width="24" Height="24" Canvas.Top="2"
+                   Cursor="Hand" DragDelta="OnThumbDragDelta">
                 <Thumb.Template>
                     <ControlTemplate TargetType="Thumb">
-                        <Border Background="{DynamicResource SurfaceBrush}"
-                                CornerRadius="12"
-                                BorderBrush="{DynamicResource AccentBrush}"
-                                BorderThickness="1">
+                        <Border x:Name="ThumbBorder"
+                                Background="#847068"
+                                BorderBrush="#40FFFFFF"
+                                BorderThickness="2"
+                                CornerRadius="12">
                             <Border.Effect>
-                                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Opacity="0.2"/>
+                                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Opacity="0.3"/>
                             </Border.Effect>
                         </Border>
                     </ControlTemplate>

@@ -10,6 +10,7 @@ using TurnAFile.Core.Models;
 using TurnAFile.Core.Services;
 using TurnAFile.Windows.Services;
 using TurnAFile.Windows.Views;
+using Wpf.Ui.Appearance;
 
 namespace TurnAFile.Windows;
 
@@ -494,6 +495,11 @@ public partial class App : System.Windows.Application
 
     public void ApplyTheme(AppTheme theme)
     {
+        // Toggle WPF-UI theme
+        var wpfUiTheme = theme == AppTheme.Dark ? ApplicationTheme.Dark : ApplicationTheme.Light;
+        ApplicationThemeManager.Apply(wpfUiTheme);
+
+        // Swap custom brush dictionary
         if (_currentThemeResources != null)
             Resources.MergedDictionaries.Remove(_currentThemeResources);
 
@@ -502,14 +508,13 @@ public partial class App : System.Windows.Application
         { Source = new Uri($"/Styles/{themeName}", UriKind.Relative) };
         Resources.MergedDictionaries.Add(_currentThemeResources);
 
+        // Refresh all open windows
         foreach (Window window in Windows)
         {
             var s = window.Style; window.Style = null; window.Style = s;
+            window.Background = (System.Windows.Media.Brush)FindResource("WindowBackgroundBrush");
             if (window is MainWindow mw)
-            {
                 mw.UpdateThemeState(theme);
-                mw.Background = (System.Windows.Media.Brush)FindResource("WindowBackgroundBrush");
-            }
         }
     }
 }           

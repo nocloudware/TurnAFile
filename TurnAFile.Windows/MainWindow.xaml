@@ -9,8 +9,6 @@
         MinHeight="640" MinWidth="720"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource WindowBackgroundBrush}"
-        FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}"
-        FontFamily="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}"
         WindowStyle="None"
         AllowsTransparency="False">
 
@@ -18,7 +16,7 @@
         <resx:StringsWrapper x:Key="Strings" />
         <BitmapImage x:Key="VideoIcon"   UriSource="/Assets/Emojis/video.png" />
         <BitmapImage x:Key="AudioIcon"   UriSource="/Assets/Emojis/audio.png" />
-        <BitmapImage x:Key="ImageIcon"   UriSource="/Assets/Emojis/image.png" />
+        <BitmapImage x:Key="ImageIcon"   UriSource="/Assets/Emojis/camera.png" />
         <BitmapImage x:Key="DocumentEmojiIcon" UriSource="/Assets/Emojis/file.png" />
         <BitmapImage x:Key="DataEmojiIcon" UriSource="/Assets/Emojis/chart.png" />
         <BitmapImage x:Key="FlagUk" UriSource="/Assets/Emojis/flag-uk.png" />
@@ -30,7 +28,10 @@
         <BitmapImage x:Key="FlagBr" UriSource="/Assets/Emojis/flag-br.png" />
     </Window.Resources>
 
-    <Grid Margin="10">
+    <Grid Margin="10"
+          TextElement.FontFamily="Segoe UI Variable Text, Segoe UI"
+          TextOptions.TextFormattingMode="Display"
+          TextOptions.TextRenderingMode="ClearType">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -46,7 +47,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <Image Source="{StaticResource VideoIcon}" Width="20" Height="20" Margin="0,0,7,0"/>
+                <Image Source="/Assets/icon-toggles.ico" Width="20" Height="20" Margin="0,0,7,0"/>
                 <TextBlock Text="TurnAFile"
                            FontSize="20"
                            FontWeight="Bold"
@@ -55,10 +56,10 @@
 
             <TextBlock Grid.Column="1"
                        Text="{Binding Source={StaticResource Strings}, Path=AppSubtitle}"
-                       FontSize="11"
-                       Foreground="{DynamicResource TextSecondaryBrush}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
+                        FontSize="12"
+                        Foreground="{DynamicResource TextSecondaryBrush}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
 
             <StackPanel Grid.Column="2" Orientation="Horizontal">
                 <!-- Language Selector -->

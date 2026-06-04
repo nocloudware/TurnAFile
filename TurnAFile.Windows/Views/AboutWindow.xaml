@@ -16,7 +16,10 @@
         <BitmapImage UriSource="/Assets/icon-toggles.ico"/>
     </Window.Icon>
 
-    <Grid Margin="20">
+    <Grid Margin="20"
+          TextElement.FontFamily="Segoe UI Variable Text, Segoe UI"
+          TextOptions.TextFormattingMode="Display"
+          TextOptions.TextRenderingMode="ClearType">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
