@@ -60,8 +60,8 @@ public class UpdateService
             var releaseNotes = release.GetProperty("body").GetString() ?? "";
             var publishedDate = release.GetProperty("published_at").GetDateTime();
 
-            var currentVersion = System.Reflection.Assembly.GetExecutingAssembly()
-                .GetName().Version?.ToString() ?? "0.0.0";
+            var currentVersion = System.Reflection.Assembly.GetEntryAssembly()
+                ?.GetName().Version?.ToString() ?? "0.0.0";
 
             return new UpdateInfo
             {
