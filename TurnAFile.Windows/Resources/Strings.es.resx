@@ -100,10 +100,24 @@
   <data name="QualityMedium" xml:space="preserve">
     <value>Media</value>
   </data>
-  <data name="QualityLow" xml:space="preserve">
+<data name="QualityLow" xml:space="preserve">
     <value>Baja</value>
   </data>
-  
+  <data name="NormalizeAudioLabel" xml:space="preserve">
+    <value>Normalizar audio al convertir</value>
+  </data>
+  <data name="NormalizeAudioTooltip" xml:space="preserve">
+    <value>Iguala el volumen percibido del audio a un objetivo fijo (EBU R128)</value>
+  </data>
+  <data name="LoudnessStreaming" xml:space="preserve">
+    <value>Streaming</value>
+  </data>
+  <data name="LoudnessBroadcast" xml:space="preserve">
+    <value>Broadcast</value>
+  </data>
+  <data name="LoudnessEbu" xml:space="preserve">
+    <value>EBU</value>
+  </data>
   <data name="VideoLabel" xml:space="preserve">
     <value>Video</value>
   </data>

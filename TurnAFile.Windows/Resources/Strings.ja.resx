@@ -100,10 +100,24 @@
   <data name="QualityMedium" xml:space="preserve">
     <value>中</value>
   </data>
-  <data name="QualityLow" xml:space="preserve">
+<data name="QualityLow" xml:space="preserve">
     <value>低</value>
   </data>
-
+  <data name="NormalizeAudioLabel" xml:space="preserve">
+    <value>変換時に音声をノーマライズ</value>
+  </data>
+  <data name="NormalizeAudioTooltip" xml:space="preserve">
+    <value>音声の知覚ラウドネスを固定目標に揃えます（EBU R128）</value>
+  </data>
+  <data name="LoudnessStreaming" xml:space="preserve">
+    <value>ストリーミング</value>
+  </data>
+  <data name="LoudnessBroadcast" xml:space="preserve">
+    <value>放送</value>
+  </data>
+  <data name="LoudnessEbu" xml:space="preserve">
+    <value>EBU</value>
+  </data>
   <data name="VideoLabel" xml:space="preserve">
     <value>ビデオ</value>
   </data>

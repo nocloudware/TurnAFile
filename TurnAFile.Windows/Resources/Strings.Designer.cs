@@ -1021,6 +1021,51 @@ namespace TurnAFile.Windows.Resources {
         }
 
         /// <summary>
+        ///   Busca una cadena traducida similar to NormalizeAudioLabel.
+        /// </summary>
+        public static string NormalizeAudioLabel {
+            get {
+                return ResourceManager.GetString("NormalizeAudioLabel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar to NormalizeAudioTooltip.
+        /// </summary>
+        public static string NormalizeAudioTooltip {
+            get {
+                return ResourceManager.GetString("NormalizeAudioTooltip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar to LoudnessStreaming.
+        /// </summary>
+        public static string LoudnessStreaming {
+            get {
+                return ResourceManager.GetString("LoudnessStreaming", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar to LoudnessBroadcast.
+        /// </summary>
+        public static string LoudnessBroadcast {
+            get {
+                return ResourceManager.GetString("LoudnessBroadcast", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar to LoudnessEbu.
+        /// </summary>
+        public static string LoudnessEbu {
+            get {
+                return ResourceManager.GetString("LoudnessEbu", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Busca una cadena traducida similar a Select output folder.
         /// </summary>
         public static string SelectOutputFolderDialog {

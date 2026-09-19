@@ -100,10 +100,24 @@
   <data name="QualityMedium" xml:space="preserve">
     <value>中</value>
   </data>
-  <data name="QualityLow" xml:space="preserve">
+<data name="QualityLow" xml:space="preserve">
     <value>低</value>
   </data>
-  
+  <data name="NormalizeAudioLabel" xml:space="preserve">
+    <value>转换时标准化音频</value>
+  </data>
+  <data name="NormalizeAudioTooltip" xml:space="preserve">
+    <value>将音频感知响度统一到固定目标（EBU R128）</value>
+  </data>
+  <data name="LoudnessStreaming" xml:space="preserve">
+    <value>流媒体</value>
+  </data>
+  <data name="LoudnessBroadcast" xml:space="preserve">
+    <value>广播</value>
+  </data>
+  <data name="LoudnessEbu" xml:space="preserve">
+    <value>EBU</value>
+  </data>
   <data name="VideoLabel" xml:space="preserve">
     <value>视频</value>
   </data>

@@ -33,6 +33,12 @@ public sealed class StringsWrapper : INotifyPropertyChanged
     public string QualityMedium => Strings.QualityMedium;
     public string QualityLow => Strings.QualityLow;
 
+    public string NormalizeAudioLabel => Strings.NormalizeAudioLabel;
+    public string NormalizeAudioTooltip => Strings.NormalizeAudioTooltip;
+    public string LoudnessStreaming => Strings.LoudnessStreaming;
+    public string LoudnessBroadcast => Strings.LoudnessBroadcast;
+    public string LoudnessEbu => Strings.LoudnessEbu;
+
     public string VideoLabel => Strings.VideoLabel;
     public string AudioLabel => Strings.AudioLabel;
     public string ImageLabel => Strings.ImageLabel;

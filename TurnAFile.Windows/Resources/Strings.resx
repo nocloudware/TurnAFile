@@ -100,6 +100,21 @@
   <data name="QualityLow" xml:space="preserve">
     <value>Low</value>
   </data>
+  <data name="NormalizeAudioLabel" xml:space="preserve">
+    <value>Normalize audio when converting</value>
+  </data>
+  <data name="NormalizeAudioTooltip" xml:space="preserve">
+    <value>Equalizes perceived loudness (EBU R128) to a fixed target</value>
+  </data>
+  <data name="LoudnessStreaming" xml:space="preserve">
+    <value>Streaming</value>
+  </data>
+  <data name="LoudnessBroadcast" xml:space="preserve">
+    <value>Broadcast</value>
+  </data>
+  <data name="LoudnessEbu" xml:space="preserve">
+    <value>EBU</value>
+  </data>
   <data name="VideoLabel" xml:space="preserve">
     <value>Video</value>
   </data>
