@@ -13,6 +13,7 @@ agent_actions.log
 .env
 *.csx
 .opencode/
+.superpowers/
 /test_conversion.csx
 
 
