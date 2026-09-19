@@ -136,6 +136,9 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     private ToggleState _selectedAudioQuality = ToggleState.Medium;
     private ToggleState _selectedImageQuality = ToggleState.Medium;
 
+    private LoudnessTarget? _videoLoudness;
+    private LoudnessTarget? _audioLoudness;
+
     private ImageSource? _videoIcon;
     private ImageSource? _audioIcon;
     private ImageSource? _imageIcon;
@@ -409,8 +412,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                 var capturedQuality = qualityValue;
 
                 qualityItem.Click += async (_, _) =>
-                    await ConvertSingleFileAsync(capturedFile, capturedFormat, capturedQuality,
-                        NormalizeAudioCheckBox.IsChecked == true, MapLoudnessTarget(NormalizeLoudnessToggle.State));
+                    await ConvertSingleFileAsync(capturedFile, capturedFormat, capturedQuality);
 
                 formatItem.Items.Add(qualityItem);
             }
@@ -438,8 +440,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         yield return (StringsWrapper.Instance.QualityBaja, ToggleState.Low);
     }
 
-    private async Task ConvertSingleFileAsync(FileItem file, string targetFormat, ToggleState quality,
-        bool normalizeAudio, LoudnessTarget loudnessTarget)
+    private async Task ConvertSingleFileAsync(FileItem file, string targetFormat, ToggleState quality)
     {
         if (_isConverting)
         {
@@ -488,6 +489,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                                 args.Percentage, 1, 1, args.Duration, args.CurrentTime);
                         });
                     };
+                    var (normalizeAudio, loudnessTarget) = GetLoudnessForCategory(category);
                     success = await svc.ConvertAsync(file.FullPath, outputPath, targetFormat,
                         ConversionHelpers.MapVideoQuality(quality), ConversionHelpers.MapAudioQuality(quality), ConversionHelpers.MapImageScaling(quality),
                         _currentCts.Token, ffmpegPath, normalizeAudio, loudnessTarget);
@@ -630,19 +632,27 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         _ => "Media"
     };
 
-    private static LoudnessTarget MapLoudnessTarget(ToggleState s) => s switch
+    private static LoudnessTarget? VolumeFromIndex(int index) => index switch
     {
-        ToggleState.High => LoudnessTarget.Streaming,
-        ToggleState.Low => LoudnessTarget.Ebu,
-        _ => LoudnessTarget.Broadcast
+        1 => LoudnessTarget.Ebu,
+        2 => LoudnessTarget.Broadcast,
+        3 => LoudnessTarget.Streaming,
+        _ => null
     };
 
-    private static ToggleState MapLoudnessState(LoudnessTarget t) => t switch
+    private static int IndexFromVolume(LoudnessTarget? target) => target switch
     {
-        LoudnessTarget.Streaming => ToggleState.High,
-        LoudnessTarget.Ebu => ToggleState.Low,
-        _ => ToggleState.Medium
+        LoudnessTarget.Ebu => 1,
+        LoudnessTarget.Broadcast => 2,
+        LoudnessTarget.Streaming => 3,
+        _ => 0
     };
+
+    private (bool normalizeAudio, LoudnessTarget loudnessTarget) GetLoudnessForCategory(FileCategory category)
+    {
+        var target = category == FileCategory.Video ? _videoLoudness : _audioLoudness;
+        return target.HasValue ? (true, target.Value) : (false, LoudnessTarget.Broadcast);
+    }
 
     private void RemoveFile(FileItem file)
     {
@@ -713,12 +723,10 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         if (AudioQualityToggle != null) AudioQualityToggle.State = _selectedAudioQuality;
         if (ImageQualityToggle != null) ImageQualityToggle.State = _selectedImageQuality;
 
-        if (NormalizeAudioCheckBox != null)
-        {
-            NormalizeAudioCheckBox.IsChecked = settings.NormalizeAudio;
-            NormalizeLoudnessToggle.State = MapLoudnessState(settings.DefaultLoudnessTarget);
-            NormalizeLoudnessToggle.IsEnabled = settings.NormalizeAudio;
-        }
+        _videoLoudness = settings.VideoLoudness;
+        _audioLoudness = settings.AudioLoudness;
+        if (VideoVolumeCombo != null) VideoVolumeCombo.SelectedIndex = IndexFromVolume(_videoLoudness);
+        if (AudioVolumeCombo != null) AudioVolumeCombo.SelectedIndex = IndexFromVolume(_audioLoudness);
     }
 
     private void SaveSettings()
@@ -753,8 +761,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             _ => ImageScaling.SeventyFivePercent
         };
 
-        settings.NormalizeAudio = NormalizeAudioCheckBox?.IsChecked == true;
-        settings.DefaultLoudnessTarget = MapLoudnessTarget(NormalizeLoudnessToggle?.State ?? ToggleState.Medium);
+        settings.VideoLoudness = _videoLoudness;
+        settings.AudioLoudness = _audioLoudness;
 
         _configService.SaveSettings(settings);
     }
@@ -850,16 +858,14 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         if (ImageQualityToggle != null) { _selectedImageQuality = ImageQualityToggle.State; SaveSettings(); }
     }
 
-    private void OnNormalizeAudioChanged(object sender, RoutedEventArgs e)
+    private void OnVideoVolumeChanged(object sender, SelectionChangedEventArgs e)
     {
-        bool enabled = NormalizeAudioCheckBox.IsChecked == true;
-        NormalizeLoudnessToggle.IsEnabled = enabled;
-        SaveSettings();
+        if (VideoVolumeCombo != null) { _videoLoudness = VolumeFromIndex(VideoVolumeCombo.SelectedIndex); SaveSettings(); }
     }
 
-    private void OnNormalizeLoudnessChanged(object sender, RoutedEventArgs e)
+    private void OnAudioVolumeChanged(object sender, SelectionChangedEventArgs e)
     {
-        SaveSettings();
+        if (AudioVolumeCombo != null) { _audioLoudness = VolumeFromIndex(AudioVolumeCombo.SelectedIndex); SaveSettings(); }
     }
 
     private void OnDocumentFormatChanged(object sender, SelectionChangedEventArgs e)
@@ -1007,15 +1013,13 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         _progressWindow.Show();
 
         await ProcessConversionAsync(filesToProcess,
-            ConversionHelpers.MapVideoQuality(_selectedVideoQuality), ConversionHelpers.MapAudioQuality(_selectedAudioQuality), ConversionHelpers.MapImageScaling(_selectedImageQuality), _currentCts.Token,
-            NormalizeAudioCheckBox.IsChecked == true, MapLoudnessTarget(NormalizeLoudnessToggle.State));
+            ConversionHelpers.MapVideoQuality(_selectedVideoQuality), ConversionHelpers.MapAudioQuality(_selectedAudioQuality), ConversionHelpers.MapImageScaling(_selectedImageQuality), _currentCts.Token);
     }
 
     private async Task ProcessConversionAsync(
         List<FileItem> files,
         VideoQuality videoQuality, AudioQuality audioQuality, ImageScaling imageScaling,
-        CancellationToken ct,
-        bool normalizeAudio, LoudnessTarget loudnessTarget)
+        CancellationToken ct)
     {
         var logger = new ConversionLogger();
         int processed = 0;
@@ -1066,6 +1070,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                                         args.Percentage, processed, files.Count, args.Duration, args.CurrentTime);
                                 });
                             };
+                            var (normalizeAudio, loudnessTarget) = GetLoudnessForCategory(category);
                             ok = await svc.ConvertAsync(file.FullPath, outputPath, targetFormat,
                                 videoQuality, audioQuality, imageScaling, ct, ffmpegPath, normalizeAudio, loudnessTarget);
                             break;

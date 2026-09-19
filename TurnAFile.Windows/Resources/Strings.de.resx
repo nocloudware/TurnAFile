@@ -103,20 +103,20 @@
 <data name="QualityLow" xml:space="preserve">
     <value>Niedrig</value>
   </data>
-  <data name="NormalizeAudioLabel" xml:space="preserve">
-    <value>Normalize audio when converting</value>
+  <data name="VolumeHeader" xml:space="preserve">
+    <value>Lautstärke</value>
   </data>
-  <data name="NormalizeAudioTooltip" xml:space="preserve">
-    <value>Gleicht die wahrgenommene Lautstärke an ein festes Ziel an (EBU R128)</value>
+  <data name="VolumeNone" xml:space="preserve">
+    <value>Lautstärke nicht normalisieren</value>
   </data>
-  <data name="LoudnessStreaming" xml:space="preserve">
-    <value>Streaming</value>
+  <data name="VolumeLow" xml:space="preserve">
+    <value>EBU · -23 LUFS · am leisesten</value>
   </data>
-  <data name="LoudnessBroadcast" xml:space="preserve">
-    <value>Broadcast</value>
+  <data name="VolumeMedium" xml:space="preserve">
+    <value>Broadcast · -16 LUFS · empfohlen</value>
   </data>
-  <data name="LoudnessEbu" xml:space="preserve">
-    <value>EBU</value>
+  <data name="VolumeHigh" xml:space="preserve">
+    <value>Streaming · -14 LUFS · am lautesten</value>
   </data>
   <data name="VideoLabel" xml:space="preserve">
     <value>Video</value>

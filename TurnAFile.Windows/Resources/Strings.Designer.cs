@@ -1021,47 +1021,47 @@ namespace TurnAFile.Windows.Resources {
         }
 
         /// <summary>
-        ///   Busca una cadena traducida similar to NormalizeAudioLabel.
+        ///   Busca una cadena traducida similar to VolumeHeader.
         /// </summary>
-        public static string NormalizeAudioLabel {
+        public static string VolumeHeader {
             get {
-                return ResourceManager.GetString("NormalizeAudioLabel", resourceCulture);
+                return ResourceManager.GetString("VolumeHeader", resourceCulture);
             }
         }
 
         /// <summary>
-        ///   Busca una cadena traducida similar to NormalizeAudioTooltip.
+        ///   Busca una cadena traducida similar to VolumeNone.
         /// </summary>
-        public static string NormalizeAudioTooltip {
+        public static string VolumeNone {
             get {
-                return ResourceManager.GetString("NormalizeAudioTooltip", resourceCulture);
+                return ResourceManager.GetString("VolumeNone", resourceCulture);
             }
         }
 
         /// <summary>
-        ///   Busca una cadena traducida similar to LoudnessStreaming.
+        ///   Busca una cadena traducida similar to VolumeLow.
         /// </summary>
-        public static string LoudnessStreaming {
+        public static string VolumeLow {
             get {
-                return ResourceManager.GetString("LoudnessStreaming", resourceCulture);
+                return ResourceManager.GetString("VolumeLow", resourceCulture);
             }
         }
 
         /// <summary>
-        ///   Busca una cadena traducida similar to LoudnessBroadcast.
+        ///   Busca una cadena traducida similar to VolumeMedium.
         /// </summary>
-        public static string LoudnessBroadcast {
+        public static string VolumeMedium {
             get {
-                return ResourceManager.GetString("LoudnessBroadcast", resourceCulture);
+                return ResourceManager.GetString("VolumeMedium", resourceCulture);
             }
         }
 
         /// <summary>
-        ///   Busca una cadena traducida similar to LoudnessEbu.
+        ///   Busca una cadena traducida similar to VolumeHigh.
         /// </summary>
-        public static string LoudnessEbu {
+        public static string VolumeHigh {
             get {
-                return ResourceManager.GetString("LoudnessEbu", resourceCulture);
+                return ResourceManager.GetString("VolumeHigh", resourceCulture);
             }
         }
 
