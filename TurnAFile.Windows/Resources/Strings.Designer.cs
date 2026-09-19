@@ -1030,6 +1030,15 @@ namespace TurnAFile.Windows.Resources {
         }
 
         /// <summary>
+        ///   Busca una cadena traducida similar to VolumeOff.
+        /// </summary>
+        public static string VolumeOff {
+            get {
+                return ResourceManager.GetString("VolumeOff", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Busca una cadena traducida similar to VolumeNone.
         /// </summary>
         public static string VolumeNone {

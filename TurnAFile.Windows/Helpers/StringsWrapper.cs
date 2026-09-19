@@ -34,6 +34,7 @@ public sealed class StringsWrapper : INotifyPropertyChanged
     public string QualityLow => Strings.QualityLow;
 
     public string VolumeHeader => Strings.VolumeHeader;
+    public string VolumeOff => Strings.VolumeOff;
     public string VolumeNone => Strings.VolumeNone;
     public string VolumeLow => Strings.VolumeLow;
     public string VolumeMedium => Strings.VolumeMedium;

@@ -281,7 +281,7 @@
                               Style="{StaticResource ThemedComboBoxStyle}"
                               Margin="4,0,0,10"
                               SelectionChanged="OnVideoVolumeChanged">
-                        <ComboBoxItem Content="No" ToolTip="{Binding Source={StaticResource Strings}, Path=VolumeNone}"/>
+                        <ComboBoxItem Content="{Binding Source={StaticResource Strings}, Path=VolumeOff}" ToolTip="{Binding Source={StaticResource Strings}, Path=VolumeNone}"/>
                         <ComboBoxItem Content="🔈" ToolTip="{Binding Source={StaticResource Strings}, Path=VolumeLow}"/>
                         <ComboBoxItem Content="🔉" ToolTip="{Binding Source={StaticResource Strings}, Path=VolumeMedium}"/>
                         <ComboBoxItem Content="🔊" ToolTip="{Binding Source={StaticResource Strings}, Path=VolumeHigh}"/>
@@ -311,7 +311,7 @@
                               Style="{StaticResource ThemedComboBoxStyle}"
                               Margin="4,0,0,10"
                               SelectionChanged="OnAudioVolumeChanged">
-                        <ComboBoxItem Content="No" ToolTip="{Binding Source={StaticResource Strings}, Path=VolumeNone}"/>
+                        <ComboBoxItem Content="{Binding Source={StaticResource Strings}, Path=VolumeOff}" ToolTip="{Binding Source={StaticResource Strings}, Path=VolumeNone}"/>
                         <ComboBoxItem Content="🔈" ToolTip="{Binding Source={StaticResource Strings}, Path=VolumeLow}"/>
                         <ComboBoxItem Content="🔉" ToolTip="{Binding Source={StaticResource Strings}, Path=VolumeMedium}"/>
                         <ComboBoxItem Content="🔊" ToolTip="{Binding Source={StaticResource Strings}, Path=VolumeHigh}"/>

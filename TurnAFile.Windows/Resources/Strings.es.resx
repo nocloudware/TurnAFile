@@ -106,6 +106,9 @@
   <data name="VolumeHeader" xml:space="preserve">
     <value>Volumen</value>
   </data>
+  <data name="VolumeOff" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="VolumeNone" xml:space="preserve">
     <value>No normalizar el volumen</value>
   </data>
