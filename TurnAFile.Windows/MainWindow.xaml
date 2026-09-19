@@ -228,6 +228,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <!-- Header row -->
@@ -287,14 +288,49 @@
                                                 Margin="0,0,0,10"
                                                 StateChanged="OnAudioQualityChanged"/>
 
+                    <!-- Normalización de audio -->
+                    <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal"
+                                VerticalAlignment="Center" Margin="0,0,0,10">
+                        <CheckBox x:Name="NormalizeAudioCheckBox"
+                                  Checked="OnNormalizeAudioChanged"
+                                  Unchecked="OnNormalizeAudioChanged"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,6,0"
+                                  ToolTip="{Binding Source={StaticResource Strings}, Path=NormalizeAudioTooltip}"/>
+                        <TextBlock Text="{Binding Source={StaticResource Strings}, Path=NormalizeAudioLabel}"
+                                   Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Source={StaticResource Strings}, Path=LoudnessStreaming}"  TextAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Source={StaticResource Strings}, Path=LoudnessBroadcast}" TextAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Source={StaticResource Strings}, Path=LoudnessEbu}"       TextAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11"/>
+                        </Grid>
+                        <controls:ThreeStateToggle x:Name="NormalizeLoudnessToggle"
+                                                   Grid.Row="1"
+                                                   Margin="0,2,0,0"
+                                                   HorizontalAlignment="Stretch"
+                                                   StateChanged="OnNormalizeLoudnessChanged"/>
+                    </Grid>
+
                     <!-- Image -->
-                    <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <Image Source="{StaticResource ImageIcon}" Width="14" Height="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Source={StaticResource Strings}, Path=ImageLabel}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <ComboBox x:Name="cmbImageFormat"
-                              Grid.Row="3" Grid.Column="1"
+                              Grid.Row="4" Grid.Column="1"
                               Style="{StaticResource ThemedComboBoxStyle}"
                               ItemsSource="{Binding ImageFormats}"
                               SelectedItem="{Binding SelectedImageFormat, Mode=TwoWay}"
@@ -302,18 +338,18 @@
                               Margin="0,0,4,10"/>
 
                     <controls:ThreeStateToggle x:Name="ImageQualityToggle"
-                                                Grid.Row="3" Grid.Column="2"
+                                                Grid.Row="4" Grid.Column="2"
                                                 Margin="0,0,0,10"
                                                 StateChanged="OnImageQualityChanged"/>
 
                     <!-- Document -->
-                    <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <Image Source="{StaticResource DocumentEmojiIcon}" Width="14" Height="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Source={StaticResource Strings}, Path=DocumentLabel}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <ComboBox x:Name="cmbDocumentFormat"
-                              Grid.Row="4" Grid.Column="1"
+                              Grid.Row="5" Grid.Column="1"
                               Style="{StaticResource ThemedComboBoxStyle}"
                               ItemsSource="{Binding DocumentFormats}"
                               SelectedItem="{Binding SelectedDocumentFormat, Mode=TwoWay}"
@@ -321,13 +357,13 @@
                               Margin="0,0,4,10"/>
 
                     <!-- Data -->
-                    <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                         <Image Source="{StaticResource DataEmojiIcon}" Width="14" Height="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Source={StaticResource Strings}, Path=DataLabel}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <ComboBox x:Name="cmbDataFormat"
-                              Grid.Row="5" Grid.Column="1"
+                              Grid.Row="6" Grid.Column="1"
                               Style="{StaticResource ThemedComboBoxStyle}"
                               ItemsSource="{Binding DataFileFormats}"
                               SelectedItem="{Binding SelectedDataFormat, Mode=TwoWay}"

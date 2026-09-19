@@ -409,7 +409,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                 var capturedQuality = qualityValue;
 
                 qualityItem.Click += async (_, _) =>
-                    await ConvertSingleFileAsync(capturedFile, capturedFormat, capturedQuality);
+                    await ConvertSingleFileAsync(capturedFile, capturedFormat, capturedQuality,
+                        NormalizeAudioCheckBox.IsChecked == true, MapLoudnessTarget(NormalizeLoudnessToggle.State));
 
                 formatItem.Items.Add(qualityItem);
             }
@@ -437,7 +438,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         yield return (StringsWrapper.Instance.QualityBaja, ToggleState.Low);
     }
 
-    private async Task ConvertSingleFileAsync(FileItem file, string targetFormat, ToggleState quality)
+    private async Task ConvertSingleFileAsync(FileItem file, string targetFormat, ToggleState quality,
+        bool normalizeAudio, LoudnessTarget loudnessTarget)
     {
         if (_isConverting)
         {
@@ -488,7 +490,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                     };
                     success = await svc.ConvertAsync(file.FullPath, outputPath, targetFormat,
                         ConversionHelpers.MapVideoQuality(quality), ConversionHelpers.MapAudioQuality(quality), ConversionHelpers.MapImageScaling(quality),
-                        _currentCts.Token, ffmpegPath);
+                        _currentCts.Token, ffmpegPath, normalizeAudio, loudnessTarget);
                     break;
 
                 case FileCategory.Image:
@@ -628,6 +630,20 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         _ => "Media"
     };
 
+    private static LoudnessTarget MapLoudnessTarget(ToggleState s) => s switch
+    {
+        ToggleState.High => LoudnessTarget.Streaming,
+        ToggleState.Low => LoudnessTarget.Ebu,
+        _ => LoudnessTarget.Broadcast
+    };
+
+    private static ToggleState MapLoudnessState(LoudnessTarget t) => t switch
+    {
+        LoudnessTarget.Streaming => ToggleState.High,
+        LoudnessTarget.Ebu => ToggleState.Low,
+        _ => ToggleState.Medium
+    };
+
     private void RemoveFile(FileItem file)
     {
         _files.Remove(file);
@@ -696,6 +712,13 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         if (VideoQualityToggle != null) VideoQualityToggle.State = _selectedVideoQuality;
         if (AudioQualityToggle != null) AudioQualityToggle.State = _selectedAudioQuality;
         if (ImageQualityToggle != null) ImageQualityToggle.State = _selectedImageQuality;
+
+        if (NormalizeAudioCheckBox != null)
+        {
+            NormalizeAudioCheckBox.IsChecked = settings.NormalizeAudio;
+            NormalizeLoudnessToggle.State = MapLoudnessState(settings.DefaultLoudnessTarget);
+            NormalizeLoudnessToggle.IsEnabled = settings.NormalizeAudio;
+        }
     }
 
     private void SaveSettings()
@@ -729,6 +752,9 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             ToggleState.Low => ImageScaling.FiftyPercent,
             _ => ImageScaling.SeventyFivePercent
         };
+
+        settings.NormalizeAudio = NormalizeAudioCheckBox?.IsChecked == true;
+        settings.DefaultLoudnessTarget = MapLoudnessTarget(NormalizeLoudnessToggle?.State ?? ToggleState.Medium);
 
         _configService.SaveSettings(settings);
     }
@@ -822,6 +848,18 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     private void OnImageQualityChanged(object sender, RoutedEventArgs e)
     {
         if (ImageQualityToggle != null) { _selectedImageQuality = ImageQualityToggle.State; SaveSettings(); }
+    }
+
+    private void OnNormalizeAudioChanged(object sender, RoutedEventArgs e)
+    {
+        bool enabled = NormalizeAudioCheckBox.IsChecked == true;
+        NormalizeLoudnessToggle.IsEnabled = enabled;
+        SaveSettings();
+    }
+
+    private void OnNormalizeLoudnessChanged(object sender, RoutedEventArgs e)
+    {
+        SaveSettings();
     }
 
     private void OnDocumentFormatChanged(object sender, SelectionChangedEventArgs e)
@@ -969,13 +1007,15 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         _progressWindow.Show();
 
         await ProcessConversionAsync(filesToProcess,
-            ConversionHelpers.MapVideoQuality(_selectedVideoQuality), ConversionHelpers.MapAudioQuality(_selectedAudioQuality), ConversionHelpers.MapImageScaling(_selectedImageQuality), _currentCts.Token);
+            ConversionHelpers.MapVideoQuality(_selectedVideoQuality), ConversionHelpers.MapAudioQuality(_selectedAudioQuality), ConversionHelpers.MapImageScaling(_selectedImageQuality), _currentCts.Token,
+            NormalizeAudioCheckBox.IsChecked == true, MapLoudnessTarget(NormalizeLoudnessToggle.State));
     }
 
     private async Task ProcessConversionAsync(
         List<FileItem> files,
         VideoQuality videoQuality, AudioQuality audioQuality, ImageScaling imageScaling,
-        CancellationToken ct)
+        CancellationToken ct,
+        bool normalizeAudio, LoudnessTarget loudnessTarget)
     {
         var logger = new ConversionLogger();
         int processed = 0;
@@ -1027,7 +1067,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                                 });
                             };
                             ok = await svc.ConvertAsync(file.FullPath, outputPath, targetFormat,
-                                videoQuality, audioQuality, imageScaling, ct, ffmpegPath);
+                                videoQuality, audioQuality, imageScaling, ct, ffmpegPath, normalizeAudio, loudnessTarget);
                             break;
 
                         case FileCategory.Image:
