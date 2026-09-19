@@ -35,7 +35,7 @@ public class AppSettings
     public string IgnoredUpdateVersion { get; set; } = string.Empty;
     public string LastVersionRun { get; set; } = string.Empty;
 
-// Normalización de audio
+    // Normalización de audio
     public bool NormalizeAudio { get; set; }
     public LoudnessTarget DefaultLoudnessTarget { get; set; } = LoudnessTarget.Broadcast;
 }
