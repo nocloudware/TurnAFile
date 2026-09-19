@@ -10,6 +10,7 @@ public class UpdateInfo
     public string TagName { get; set; } = string.Empty;
     public string Version { get; set; } = string.Empty;
     public string DownloadUrl { get; set; } = string.Empty;
+    public string DownloadAssetUrl { get; set; } = string.Empty;
     public string ReleaseNotes { get; set; } = string.Empty;
     public bool IsNewerVersion { get; set; }
     public DateTime PublishedDate { get; set; }
@@ -60,6 +61,20 @@ public class UpdateService
             var releaseNotes = release.GetProperty("body").GetString() ?? "";
             var publishedDate = release.GetProperty("published_at").GetDateTime();
 
+            var downloadAssetUrl = "";
+            if (release.TryGetProperty("assets", out var assets))
+            {
+                foreach (var asset in assets.EnumerateArray())
+                {
+                    var name = asset.GetProperty("name").GetString() ?? "";
+                    if (name.EndsWith("-Setup.exe", StringComparison.OrdinalIgnoreCase))
+                    {
+                        downloadAssetUrl = asset.GetProperty("browser_download_url").GetString() ?? "";
+                        break;
+                    }
+                }
+            }
+
             var currentVersion = System.Reflection.Assembly.GetEntryAssembly()
                 ?.GetName().Version?.ToString() ?? "0.0.0";
 
@@ -68,6 +83,7 @@ public class UpdateService
                 TagName = tagName,
                 Version = version,
                 DownloadUrl = downloadUrl,
+                DownloadAssetUrl = downloadAssetUrl,
                 ReleaseNotes = releaseNotes,
                 IsNewerVersion = IsNewerVersion(version, currentVersion),
                 PublishedDate = publishedDate

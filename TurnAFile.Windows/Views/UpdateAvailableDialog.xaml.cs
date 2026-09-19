@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
 using TurnAFile.Core.Services;
 
@@ -32,8 +35,19 @@ public partial class UpdateAvailableDialog : Window
         Title = $"TurnAFile v{_updateInfo.Version} disponible";
     }
 
-    private void OnDownloadClick(object sender, RoutedEventArgs e)
+    private async void OnDownloadClick(object sender, RoutedEventArgs e)
     {
+        DownloadButton.IsEnabled = false;
+        RemindLaterButton.IsEnabled = false;
+        IgnoreButton.IsEnabled = false;
+        DownloadButton.Content = "Descargando...";
+
+        if (!string.IsNullOrEmpty(_updateInfo.DownloadAssetUrl))
+        {
+            if (await DownloadAndRunInstallerAsync(_updateInfo.DownloadAssetUrl))
+                return;
+        }
+
         try
         {
             if (!string.IsNullOrEmpty(_updateInfo.DownloadUrl))
@@ -55,6 +69,29 @@ public partial class UpdateAvailableDialog : Window
         }
 
         Close();
+    }
+
+    private static async Task<bool> DownloadAndRunInstallerAsync(string url)
+    {
+        string dest = Path.Combine(Path.GetTempPath(), "TurnAFile-Setup.exe");
+        try
+        {
+            using var http = new HttpClient { Timeout = TimeSpan.FromMinutes(5) };
+            using (var response = await http.GetAsync(url))
+            {
+                response.EnsureSuccessStatusCode();
+                using var fs = File.Create(dest);
+                await response.Content.CopyToAsync(fs);
+            }
+
+            Process.Start(new ProcessStartInfo { FileName = dest, UseShellExecute = true });
+            Application.Current.Shutdown();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private void OnRemindLaterClick(object sender, RoutedEventArgs e)
