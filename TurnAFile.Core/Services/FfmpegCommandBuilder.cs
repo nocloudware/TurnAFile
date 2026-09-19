@@ -21,21 +21,30 @@ public enum ImageScaling
     FiftyPercent
 }
 
+public enum LoudnessTarget
+{
+    Streaming = -14,
+    Broadcast = -16,
+    Ebu = -23
+}
+
 public class FfmpegCommandBuilder
 {
     private bool _useVP8ForWebM = true;
 
     public string BuildCommand(string inputPath, string outputPath,
         string targetFormat, VideoQuality videoQuality,
-        AudioQuality audioQuality, ImageScaling imageScaling)
+        AudioQuality audioQuality, ImageScaling imageScaling,
+        bool normalizeAudio = false,
+        LoudnessTarget loudnessTarget = LoudnessTarget.Broadcast)
     {
         var ext = targetFormat.ToLower();
 
         if (ext == "mp4" || ext == "avi" || ext == "mkv" || ext == "webm" || ext == "mov")
-            return BuildVideoCommand(inputPath, outputPath, ext, videoQuality, audioQuality);
+            return BuildVideoCommand(inputPath, outputPath, ext, videoQuality, audioQuality, normalizeAudio, loudnessTarget);
 
         if (ext == "mp3" || ext == "wav" || ext == "m4a" || ext == "flac" || ext == "ogg")
-            return BuildAudioCommand(inputPath, outputPath, ext, audioQuality);
+            return BuildAudioCommand(inputPath, outputPath, ext, audioQuality, normalizeAudio, loudnessTarget);
 
         if (ext == "jpg" || ext == "png" || ext == "webp" || ext == "gif" || ext == "bmp")
             return BuildImageCommand(inputPath, outputPath, ext, imageScaling);
@@ -44,8 +53,10 @@ public class FfmpegCommandBuilder
     }
 
     private string BuildVideoCommand(string input, string output, string format,
-        VideoQuality videoQuality, AudioQuality audioQuality)
+        VideoQuality videoQuality, AudioQuality audioQuality, bool normalizeAudio, LoudnessTarget loudnessTarget)
     {
+        string loud = normalizeAudio ? $" -af {BuildLoudnessFilter(loudnessTarget)}" : "";
+
         if (format == "webm" && _useVP8ForWebM)
         {
             var qualityValue = videoQuality switch
@@ -65,7 +76,7 @@ public class FfmpegCommandBuilder
             };
 
             return $"-i \"{input}\" -c:v libvpx -crf {qualityValue} -b:v 0 " +
-                   $"-c:a libopus -b:a {audioBitrate} \"{output}\" -y";
+                   $"-c:a libopus -b:a {audioBitrate} {loud} \"{output}\" -y";
         }
 
         if (format == "webm")
@@ -87,7 +98,7 @@ public class FfmpegCommandBuilder
             };
 
             return $"-i \"{input}\" -c:v libvpx-vp9 -crf {qualityValue} -b:v 0 " +
-                   $"-c:a libopus -b:a {audioBitrate} \"{output}\" -y";
+                   $"-c:a libopus -b:a {audioBitrate} {loud} \"{output}\" -y";
         }
 
         var (codec, preset, crf) = videoQuality switch
@@ -107,16 +118,18 @@ public class FfmpegCommandBuilder
         };
 
         return $"-i \"{input}\" -c:v {codec} -preset {preset} -crf {crf} " +
-               $"-pix_fmt yuv420p -c:a aac -b:a {audioBitrateDefault} \"{output}\" -y";
+               $"-pix_fmt yuv420p -c:a aac -b:a {audioBitrateDefault} {loud} \"{output}\" -y";
     }
 
-    private string BuildAudioCommand(string input, string output, string format, AudioQuality quality)
+    private string BuildAudioCommand(string input, string output, string format, AudioQuality quality, bool normalizeAudio, LoudnessTarget loudnessTarget)
     {
+        string loud = normalizeAudio ? $" -af {BuildLoudnessFilter(loudnessTarget)}" : "";
+
         if (format == "wav")
-            return $"-i \"{input}\" -vn -c:a pcm_s16le \"{output}\" -y";
+            return $"-i \"{input}\" -vn -c:a pcm_s16le{loud} \"{output}\" -y";
 
         if (format == "flac")
-            return $"-i \"{input}\" -vn -c:a flac -compression_level 5 \"{output}\" -y";
+            return $"-i \"{input}\" -vn -c:a flac -compression_level 5{loud} \"{output}\" -y";
 
         if (format == "ogg")
         {
@@ -127,7 +140,7 @@ public class FfmpegCommandBuilder
                 AudioQuality.Low => "3",
                 _ => "5"
             };
-            return $"-i \"{input}\" -vn -c:a libvorbis -q:a {qualityValue} \"{output}\" -y";
+            return $"-i \"{input}\" -vn -c:a libvorbis -q:a {qualityValue}{loud} \"{output}\" -y";
         }
 
         var bitrate = quality switch
@@ -140,7 +153,7 @@ public class FfmpegCommandBuilder
 
         var codec = format == "mp3" ? "libmp3lame" : "aac";
 
-        return $"-i \"{input}\" -vn -c:a {codec} -b:a {bitrate} \"{output}\" -y";
+        return $"-i \"{input}\" -vn -c:a {codec} -b:a {bitrate}{loud} \"{output}\" -y";
     }
 
     private string BuildImageCommand(string input, string output, string format, ImageScaling scaling)
@@ -163,4 +176,7 @@ public class FfmpegCommandBuilder
 
         return $"-i \"{input}\" {scaleFilter} {quality} \"{output}\" -y".Trim();
     }
+
+    public static string BuildLoudnessFilter(LoudnessTarget target)
+        => $"loudnorm=I={(int)target}:TP=-1.5:LRA=11";
 }
