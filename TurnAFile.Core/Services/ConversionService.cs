@@ -31,10 +31,13 @@ public class ConversionService
     public async Task<bool> ConvertAsync(string inputPath, string outputPath,
         string targetFormat, VideoQuality videoQuality,
         AudioQuality audioQuality, ImageScaling imageScaling,
-        CancellationToken cancellationToken, string ffmpegPath)
+        CancellationToken cancellationToken, string ffmpegPath,
+        bool normalizeAudio = false,
+        LoudnessTarget loudnessTarget = LoudnessTarget.Broadcast)
     {
         var args = _commandBuilder.BuildCommand(inputPath, outputPath,
-            targetFormat, videoQuality, audioQuality, imageScaling);
+            targetFormat, videoQuality, audioQuality, imageScaling,
+            normalizeAudio, loudnessTarget);
 
         var processInfo = new ProcessStartInfo
         {
