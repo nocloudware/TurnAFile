@@ -23,7 +23,8 @@ public enum FileItemStatus
 {
     Pending,
     Success,
-    Failed
+    Failed,
+    Skipped
 }
 
 public class FileItem : INotifyPropertyChanged
@@ -48,10 +49,18 @@ public class FileItem : INotifyPropertyChanged
     }
 
     public Visibility StatusVisible => Status != FileItemStatus.Pending ? Visibility.Visible : Visibility.Collapsed;
-    public string StatusIcon => Status == FileItemStatus.Success ? "✓" : "✗";
-    public System.Windows.Media.Brush StatusColor => Status == FileItemStatus.Success
-        ? new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(76, 175, 80))
-        : new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(244, 67, 54));
+    public string StatusIcon => Status switch
+    {
+        FileItemStatus.Success => "✓",
+        FileItemStatus.Skipped => "⊘",
+        _ => "✗"
+    };
+    public System.Windows.Media.Brush StatusColor => Status switch
+    {
+        FileItemStatus.Success => new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(76, 175, 80)),
+        FileItemStatus.Skipped => new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 152, 0)),
+        _ => new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(244, 67, 54))
+    };
 
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged(string p) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
@@ -1008,7 +1017,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         _progressWindow.Owner = this;
         _progressWindow.StartConversion(filesToProcess.Count, _currentCts);
         _progressWindow.InitializeFileInfo(filesToProcess[0].FullPath,
-            Path.GetExtension(ConversionHelpers.GetOutputPath(filesToProcess[0].FullPath, GetTargetFormatForFile(filesToProcess[0].Name))).TrimStart('.').ToUpper());
+            Path.GetExtension(ConversionHelpers.GetTargetPath(filesToProcess[0].FullPath, GetTargetFormatForFile(filesToProcess[0].Name))).TrimStart('.').ToUpper());
         _progressWindow.Closed += OnProgressWindowClosed;
         _progressWindow.Show();
 
@@ -1039,9 +1048,17 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                 var file = files[i];
                 processed = i + 1;
                 string targetFormat = GetTargetFormatForFile(file.Name);
-                string outputPath = ConversionHelpers.GetOutputPath(file.FullPath, targetFormat, _customOutputFolder);
+                string outputPath = ConversionHelpers.GetTargetPath(file.FullPath, targetFormat, _customOutputFolder);
                 string qualityDisplay = GetQualityDisplayName(file.Name);
                 string sourceFormat = GetSourceFormatForFile(file.Name);
+
+                // El destino ya existe: se omite el archivo (solo en conversión por lotes)
+                if (File.Exists(outputPath))
+                {
+                    logger.LogWarning($"Omitido (ya existe): {outputPath}");
+                    file.Status = FileItemStatus.Skipped;
+                    continue;
+                }
 
                 var fileStopwatch = System.Diagnostics.Stopwatch.StartNew();
                 bool ok = false;

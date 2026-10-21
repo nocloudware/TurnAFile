@@ -16,7 +16,11 @@ public static class ConversionHelpers
             "ffmpeg.exe");
     }
 
-    public static string GetOutputPath(string inputPath, string targetFormat, string? customOutputFolder = null)
+    /// <summary>
+    /// Ruta destino "plana" (mismo nombre que el origen, extensión destino).
+    /// No comprueba existencia: sirve para detectar si el destino ya está creado.
+    /// </summary>
+    public static string GetTargetPath(string inputPath, string targetFormat, string? customOutputFolder = null)
     {
         string directory = !string.IsNullOrEmpty(customOutputFolder)
             ? customOutputFolder
@@ -25,11 +29,24 @@ public static class ConversionHelpers
         string fileNameWithoutExt = Path.GetFileNameWithoutExtension(inputPath);
         string targetExt = NormalizeExtension(targetFormat);
 
-        string outputPath = Path.Combine(directory, $"{fileNameWithoutExt}.{targetExt}");
+        return Path.Combine(directory, $"{fileNameWithoutExt}.{targetExt}");
+    }
+
+    /// <summary>
+    /// Ruta destino definitiva. Si el nombre ya existe, añade un sufijo numerado
+    /// ("archivo (1).ext") para no sobrescribir el original.
+    /// </summary>
+    public static string GetOutputPath(string inputPath, string targetFormat, string? customOutputFolder = null)
+    {
+        string outputPath = GetTargetPath(inputPath, targetFormat, customOutputFolder);
+        string directory = Path.GetDirectoryName(outputPath)!;
+        string baseName = Path.GetFileNameWithoutExtension(outputPath);
+        string extension = Path.GetExtension(outputPath);
+
         int counter = 1;
         while (File.Exists(outputPath))
         {
-            outputPath = Path.Combine(directory, $"{fileNameWithoutExt} ({counter++}).{targetExt}");
+            outputPath = Path.Combine(directory, $"{baseName} ({counter++}){extension}");
         }
         return outputPath;
     }
