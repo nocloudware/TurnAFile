@@ -58,7 +58,7 @@ public class ConversionService
         _totalFrames = 0;
 
         string ext = Path.GetExtension(inputPath).ToLower();
-        _isAudioOrImage = ext is ".mp3" or ".wav" or ".m4a" or ".flac" or ".ogg" or
+        _isAudioOrImage = ext is ".mp3" or ".wav" or ".m4a" or ".flac" or ".ogg" or ".opus" or
                           ".aac" or ".wma" or ".jpg" or ".jpeg" or ".png" or
                           ".gif" or ".bmp" or ".webp" or ".tiff";
 

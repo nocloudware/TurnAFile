@@ -97,8 +97,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     private DataConverter? _dataConverter;
     private OcrConverter? _ocrConverter;
 
-    public List<string> VideoFormats { get; } = new() { "MP4", "AVI", "MKV", "WEBM", "MOV", "MP3", "M4A" };
-    public List<string> AudioFormats { get; } = new() { "MP3", "WAV", "M4A", "FLAC", "OGG" };
+    public List<string> VideoFormats { get; } = new() { "MP4", "AVI", "MKV", "WEBM", "MOV", "MP3", "M4A", "OPUS" };
+    public List<string> AudioFormats { get; } = new() { "MP3", "WAV", "M4A", "FLAC", "OGG", "OPUS" };
     public List<string> ImageFormats { get; } = new() { "JPG", "PNG", "WEBP", "GIF", "BMP", "TIFF", "PDF", "TXT (OCR)" };
 
     // Nuevos formatos para documentos, datos y OCR
@@ -292,7 +292,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         var dialog = new OpenFileDialog
         {
             Multiselect = true,
-            Filter = "Archivos soportados|*.mp4;*.mov;*.avi;*.mkv;*.mp3;*.wav;*.jpg;*.png;*.gif;*.docx;*.pdf;*.xlsx;*.csv;*.json|Todos los archivos|*.*"
+            Filter = "Archivos soportados|*.mp4;*.mov;*.avi;*.mkv;*.mp3;*.wav;*.opus;*.jpg;*.png;*.gif;*.docx;*.pdf;*.xlsx;*.csv;*.json|Todos los archivos|*.*"
         };
         if (dialog.ShowDialog() == true)
             AddFiles(dialog.FileNames);
@@ -919,7 +919,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         if (!Path.HasExtension(fileName)) return false;
         var ext = Path.GetExtension(fileName).ToLower();
-        return ext is ".mp3" or ".wav" or ".m4a" or ".flac" or ".ogg" or ".aac" or ".wma";
+        return ext is ".mp3" or ".wav" or ".m4a" or ".flac" or ".ogg" or ".opus" or ".aac" or ".wma";
     }
 
     private static bool IsImageFile(string fileName)

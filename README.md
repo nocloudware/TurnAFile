@@ -1,4 +1,4 @@
-# TurnAFile
+﻿# TurnAFile
 
 > All-in-one media and document converter for Windows.
 > Convert video, audio, images, documents, data, and more — no hassle.
@@ -10,17 +10,17 @@
 ### 🎬 Video Conversion
 | Input | Output Formats |
 |-------|---------------|
-| MP4, AVI, MKV, WEBM, MOV, WMV, FLV | MP4, AVI, MKV, WEBM, MOV, **MP3**, **M4A** |
+| MP4, AVI, MKV, WEBM, MOV, WMV, FLV | MP4, AVI, MKV, WEBM, MOV, **MP3**, **M4A**, **OPUS** |
 
 - Convert between video formats
-- Extract audio from video (MP3, M4A)
+- Extract audio from video (MP3, M4A, OPUS)
 - Adjustable quality: High / Medium / Low
 - Batch conversion
 
 ### 🎵 Audio Conversion
 | Input | Output Formats |
 |-------|---------------|
-| MP3, WAV, M4A, FLAC, OGG, AAC, WMA | MP3, WAV, M4A, FLAC, OGG |
+| MP3, WAV, M4A, FLAC, OGG, OPUS, AAC, WMA | MP3, WAV, M4A, FLAC, OGG, OPUS |
 
 - Convert between audio formats
 - Adjustable quality: High / Medium / Low
@@ -111,8 +111,8 @@
 
 | Input | Output Formats |
 |-------|---------------|
-| MP4, AVI, MKV, WEBM, MOV, WMV, FLV | MP4, AVI, MKV, WEBM, MOV, **MP3**, **M4A** |
-| MP3, WAV, M4A, FLAC, OGG, AAC, WMA | MP3, WAV, M4A, FLAC, OGG |
+| MP4, AVI, MKV, WEBM, MOV, WMV, FLV | MP4, AVI, MKV, WEBM, MOV, **MP3**, **M4A**, **OPUS** |
+| MP3, WAV, M4A, FLAC, OGG, OPUS, AAC, WMA | MP3, WAV, M4A, FLAC, OGG, OPUS |
 | JPG, JPEG, PNG, WEBP, GIF, BMP, TIFF | JPG, PNG, WEBP, GIF, BMP, TIFF, **PDF**, **TXT (OCR)** |
 | DOCX | DOCX, PDF, TXT, MD, HTML, EPUB |
 | TXT | TXT, DOCX, HTML, **PDF** |

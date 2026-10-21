@@ -26,7 +26,7 @@ public static class ShellMenuInstaller
         { ".mp4", ".avi", ".mkv", ".webm", ".mov", ".wmv", ".flv" };
 
     private static readonly string[] AudioExtensions =
-        { ".mp3", ".wav", ".m4a", ".flac", ".ogg", ".aac", ".wma" };
+        { ".mp3", ".wav", ".m4a", ".flac", ".ogg", ".opus", ".aac", ".wma" };
 
     private static readonly string[] ImageExtensions =
         { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp", ".tiff" };
@@ -37,8 +37,8 @@ public static class ShellMenuInstaller
     private static readonly string[] DataExtensions =
         { ".xlsx", ".csv", ".json" };
 
-    private static readonly string[] VideoFormats = { "MP4", "AVI", "MKV", "WEBM", "MOV", "MP3", "M4A" };
-    private static readonly string[] AudioFormats = { "MP3", "WAV", "M4A", "FLAC", "OGG" };
+    private static readonly string[] VideoFormats = { "MP4", "AVI", "MKV", "WEBM", "MOV", "MP3", "M4A", "OPUS" };
+    private static readonly string[] AudioFormats = { "MP3", "WAV", "M4A", "FLAC", "OGG", "OPUS" };
     private static readonly string[] ImageFormats = { "JPG", "PNG", "WEBP", "GIF", "BMP", "TIFF", "PDF", "TXT (OCR)" };
     private const string OcrDisplay = "TXT (OCR)";
     private static readonly string[] DocumentFormats = { "DOCX", "PDF", "MD", "HTML", "EPUB", "TXT", "RTF", "ODT" };

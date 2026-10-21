@@ -56,7 +56,7 @@ public static class ConversionHelpers
         return targetFormat.ToLower() switch
         {
             "jpg" or "jpeg" => "jpg",
-            "docx" or "xlsx" or "md" or "html" or "epub" or "txt" or "csv" or "json" or "png" or "webp" or "gif" or "bmp" or "mp4" or "avi" or "mkv" or "webm" or "mov" or "mp3" or "wav" or "m4a" or "flac" or "ogg" or "pdf" => targetFormat.ToLower(),
+            "docx" or "xlsx" or "md" or "html" or "epub" or "txt" or "csv" or "json" or "png" or "webp" or "gif" or "bmp" or "mp4" or "avi" or "mkv" or "webm" or "mov" or "mp3" or "wav" or "m4a" or "flac" or "ogg" or "opus" or "pdf" => targetFormat.ToLower(),
             "ocr" => "txt",
             _ => targetFormat.ToLower()
         };

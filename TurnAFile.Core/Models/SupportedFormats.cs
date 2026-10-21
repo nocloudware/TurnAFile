@@ -21,7 +21,7 @@ public static class SupportedFormats
 
     public static List<string> AudioFormats { get; } = new()
     {
-        "MP3", "WAV", "M4A", "FLAC", "OGG", "AAC", "WMA"
+        "MP3", "WAV", "M4A", "FLAC", "OGG", "AAC", "WMA", "OPUS"
     };
 
     public static List<string> ImageFormats { get; } = new()

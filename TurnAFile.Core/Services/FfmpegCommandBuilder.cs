@@ -43,7 +43,7 @@ public class FfmpegCommandBuilder
         if (ext == "mp4" || ext == "avi" || ext == "mkv" || ext == "webm" || ext == "mov")
             return BuildVideoCommand(inputPath, outputPath, ext, videoQuality, audioQuality, normalizeAudio, loudnessTarget);
 
-        if (ext == "mp3" || ext == "wav" || ext == "m4a" || ext == "flac" || ext == "ogg")
+        if (ext == "mp3" || ext == "wav" || ext == "m4a" || ext == "flac" || ext == "ogg" || ext == "opus")
             return BuildAudioCommand(inputPath, outputPath, ext, audioQuality, normalizeAudio, loudnessTarget);
 
         if (ext == "jpg" || ext == "png" || ext == "webp" || ext == "gif" || ext == "bmp")
@@ -141,6 +141,18 @@ public class FfmpegCommandBuilder
                 _ => "5"
             };
             return $"-i \"{input}\" -vn -c:a libvorbis -q:a {qualityValue}{loud} \"{output}\" -y";
+        }
+
+        if (format == "opus")
+        {
+            var opusBitrate = quality switch
+            {
+                AudioQuality.High => "192k",
+                AudioQuality.Medium => "128k",
+                AudioQuality.Low => "96k",
+                _ => "128k"
+            };
+            return $"-i \"{input}\" -vn -c:a libopus -b:a {opusBitrate}{loud} \"{output}\" -y";
         }
 
         var bitrate = quality switch

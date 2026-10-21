@@ -82,6 +82,7 @@ public static class IconGenerator
             "M4A" => ("\U0001F3B5", Color.FromRgb(0, 150, 136)),
             "FLAC" => ("\U0001F3B5", Color.FromRgb(63, 81, 181)),
             "OGG" => ("\U0001F3B5", Color.FromRgb(255, 87, 34)),
+            "OPUS" => ("\U0001F3B5", Color.FromRgb(94, 53, 177)),
 
             // Image formats
             "JPG" => ("\U0001F5BC\U0000FE0F", Color.FromRgb(255, 193, 7)),

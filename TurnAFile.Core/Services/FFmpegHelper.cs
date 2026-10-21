@@ -48,6 +48,7 @@ public static class FFmpegHelper
             "M4A" => "aac",
             "FLAC" => "flac",
             "OGG" => "libvorbis",
+            "OPUS" => "libopus",
             "JPG" => "mjpeg",
             "PNG" => "png",
             "WEBP" => "libwebp",
